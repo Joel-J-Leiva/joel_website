@@ -1,4 +1,4 @@
-import { ShieldCheck, Server, Terminal, Lock, ExternalLink, Download, FileText } from 'lucide-react';
+import { ShieldCheck, Server, Terminal, ExternalLink, Download, FileText } from 'lucide-react';
 import BackToProjects from '../components/BackToProjects';
 
 export default function CyberRadio() {

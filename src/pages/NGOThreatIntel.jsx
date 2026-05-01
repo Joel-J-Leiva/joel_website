@@ -1,4 +1,4 @@
-import { ShieldCheck, Server, Terminal, Lock, ExternalLink, Database } from 'lucide-react';
+import { ShieldCheck, Terminal, ExternalLink, Database } from 'lucide-react';
 import BackToProjects from '../components/BackToProjects';
 
 export default function NGOThreatIntel() {

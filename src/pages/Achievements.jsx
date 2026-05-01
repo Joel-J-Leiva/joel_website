@@ -1,4 +1,4 @@
-import { School, Bug, ShieldCheck, Key, Terminal, ShieldAlert, LifeBuoy, Server } from 'lucide-react';
+import { School, ShieldCheck } from 'lucide-react';
 
 export default function Achievements() {
   const timelineItems = [

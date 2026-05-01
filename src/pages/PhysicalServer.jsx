@@ -1,4 +1,4 @@
-import { ShieldCheck, Server, Terminal, Lock } from 'lucide-react';
+import { ShieldCheck, Terminal } from 'lucide-react';
 import BackToProjects from '../components/BackToProjects';
 
 export default function PhysicalServer() {
