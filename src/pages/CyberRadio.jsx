@@ -1,241 +1,217 @@
-import { ShieldCheck, Server, Terminal, ExternalLink, Download, FileText } from 'lucide-react';
+import { ShieldCheck, ExternalLink, Download, FileText, Radio, Users, Mic } from 'lucide-react';
 import BackToProjects from '../components/BackToProjects';
 
 export default function CyberRadio() {
   const techStack = [
-    'Cybersecurity Awareness', 'Public Speaking', 'Communication', 
-    'Teamwork', 'Research', 'Qualitative Case Study', 'Cyber Education',
-    'Risk Communication', 'Phishing Awareness', 'Digital Privacy',
-    'MFA', 'Student Outreach', 'WKNJ 90.3', 'Kean Center for Cybersecurity'
+    'Cybersecurity Awareness Outreach',
+    'Risk Communication & Translation',
+    'Phishing & Social Engineering Education',
+    'Multi-Factor Authentication (MFA) Advocacy',
+    'Qualitative Research Case Study',
+    'Inductive Thematic Analysis',
+    'WKNJ 90.3 FM Studio Infrastructure',
+    'Kean Center for Cybersecurity'
   ];
 
   const keySkills = [
-    'Communication', 'Teamwork', 'Collaboration', 
-    'Confidence', 'Accountability', 'Professional Readiness'
+    'Technical Risk Communication',
+    'Cross-Disciplinary Team Collaboration',
+    'Audience-Centric Security Training',
+    'Live Broadcast & Public Speaking',
+    'Qualitative Academic Research',
+    'Cyber Hygiene Advocacy'
   ];
 
   return (
-    <div className="max-w-6xl mx-auto pb-16">
+    <div className="max-w-6xl mx-auto pb-16 px-4">
       <BackToProjects position="top" />
 
-      <header className="mb-16 border-l-4 border-primary-container pl-6 py-2">
-        <div className="flex items-center gap-2 text-primary font-code-sm text-sm mb-4">
-          <span className="opacity-70">&gt;</span> project.open("cyber-radio")
+      {/* Header */}
+      <header className="mb-12 border-l-4 border-cyber-cyan pl-6 py-2">
+        <div className="flex items-center gap-2 text-cyber-cyan font-mono text-xs mb-3 uppercase tracking-wider">
+          <span className="opacity-70">&gt;</span> security_awareness // radio_broadcast_initiative
         </div>
-        <h1 className="font-terminal-heading text-4xl text-on-surface mb-4">
+        <h1 className="text-3xl md:text-4xl font-bold text-slate-100 mb-4 tracking-tight">
           C.Y.B.E.R. — Connecting Your Brain to Everyday Risks
         </h1>
-        <p className="text-xl text-on-surface-variant max-w-3xl leading-relaxed mb-6">
-          A student-driven cybersecurity radio talk show created to answer real-world cyber questions, increase digital safety awareness, and strengthen communication, teamwork, and professional confidence.
+        <p className="text-lg text-slate-300 max-w-3xl leading-relaxed mb-6">
+          A student-driven cybersecurity radio talk show and qualitative research case study evaluating how interactive broadcast media strengthens communication, teamwork, and risk translation skills among cyber defenders.
         </p>
-        <p className="text-lg text-on-surface-variant max-w-3xl leading-relaxed mb-6">
-          C.Y.B.E.R. stands for “Connecting Your Brain to Everyday Risks.” It is a Kean Center for Cybersecurity radio show designed to make cybersecurity more accessible by allowing students and community members to ask questions about online safety, scams, hacking, privacy, phishing, passwords, multi-factor authentication, and everyday cyber concerns.
-        </p>
-        <a 
-          href="https://www.kean.edu/academics/college-business-and-public-management/center-cybersecurity-5"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 px-6 py-3 bg-primary-container/10 text-primary-container border border-primary-container/30 hover:border-primary-container hover:bg-primary-container/20 transition-all rounded font-code-sm font-semibold"
-        >
-          View Official C.Y.B.E.R. Page <ExternalLink size={16} />
-        </a>
-      </header>
 
-      <section className="mb-16">
-        <h2 className="font-terminal-heading text-2xl text-on-surface mb-6 border-b border-surface-variant pb-3 flex items-center gap-3">
-          <span className="text-primary-container">&gt;</span> overview.load()
-        </h2>
-        <div className="bg-surface-container rounded-lg border border-outline-variant p-6 md:p-8 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-32 h-32 bg-primary opacity-5 blur-[80px] rounded-full"></div>
-          <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-secondary opacity-5 blur-[80px] rounded-full"></div>
-          <p className="text-on-surface-variant leading-relaxed text-lg mb-4">
-            The C.Y.B.E.R. Radio project was created as a student-driven cybersecurity awareness initiative through the Kean Center for Cybersecurity. The show gives students the opportunity to answer real cybersecurity questions from listeners in a live, accessible format. Instead of focusing only on technical demonstrations, the project emphasizes public communication, awareness, teamwork, and the ability to explain cybersecurity risks in a way that everyday audiences can understand.
-          </p>
-          <p className="text-on-surface-variant leading-relaxed text-lg">
-            The project later became a research case study analyzing how a student-led cybersecurity radio show can strengthen power skills such as communication, collaboration, confidence, accountability, and professional readiness.
-          </p>
-        </div>
-      </section>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-        <section>
-          <h2 className="font-terminal-heading text-2xl text-on-surface mb-6 border-b border-surface-variant pb-3 flex items-center gap-3">
-            <span className="text-secondary-fixed">&gt;</span> role.execute()
-          </h2>
-          <div className="bg-surface-container rounded-lg border border-outline-variant p-6 h-full hover:border-secondary-fixed transition-colors">
-            <div className="flex justify-between items-start mb-4">
-              <p className="text-on-surface font-semibold flex items-center gap-2">
-                <Terminal size={18} className="text-secondary-fixed" />
-                Cybersecurity Awareness Host / Student Research Contributor
-              </p>
-              <span className="text-xs font-code-sm bg-secondary-fixed/20 text-secondary-fixed px-2 py-1 rounded border border-secondary-fixed/30">Live Broadcast</span>
-            </div>
-            <ul className="space-y-3 text-on-surface-variant">
-              <li className="flex items-start gap-2"><span className="text-secondary-fixed mt-1">▹</span> Helped create and participate in a student-driven cybersecurity radio talk show at Kean University.</li>
-              <li className="flex items-start gap-2"><span className="text-secondary-fixed mt-1">▹</span> Supported a live 30-minute cybersecurity awareness broadcast focused on real questions from the community.</li>
-              <li className="flex items-start gap-2"><span className="text-secondary-fixed mt-1">▹</span> Helped explain cybersecurity topics such as phishing, scams, online safety, privacy, passwords, and multi-factor authentication in accessible language.</li>
-              <li className="flex items-start gap-2"><span className="text-secondary-fixed mt-1">▹</span> Collaborated with student team members to plan content, assign roles, rehearse responses, and prepare for audience questions.</li>
-              <li className="flex items-start gap-2"><span className="text-secondary-fixed mt-1">▹</span> Contributed to the research case study evaluating how the project strengthened communication, teamwork, and professional confidence.</li>
-              <li className="flex items-start gap-2"><span className="text-secondary-fixed mt-1">▹</span> Helped demonstrate how cybersecurity students can translate technical knowledge into practical guidance for non-technical audiences.</li>
-            </ul>
-          </div>
-        </section>
-
-        <section>
-          <h2 className="font-terminal-heading text-2xl text-on-surface mb-6 border-b border-surface-variant pb-3 flex items-center gap-3">
-            <span className="text-error">&gt;</span> security.controls()
-          </h2>
-          <div className="bg-surface-container rounded-lg border border-outline-variant p-6 h-full hover:border-error transition-colors">
-            <p className="text-on-surface font-semibold mb-4 flex items-center gap-2">
-              <ShieldCheck size={18} className="text-error" />
-              Cybersecurity Awareness Concepts Demonstrated
-            </p>
-            <ul className="space-y-3 text-on-surface-variant">
-              <li className="flex items-start gap-2"><span className="text-error mt-1">▹</span> <strong>Cybersecurity Awareness:</strong> Helping audiences understand everyday cyber risks and safer online behavior.</li>
-              <li className="flex items-start gap-2"><span className="text-error mt-1">▹</span> <strong>Phishing & Scam Prevention:</strong> Explaining how to recognize suspicious messages, links, and social engineering tactics.</li>
-              <li className="flex items-start gap-2"><span className="text-error mt-1">▹</span> <strong>Digital Privacy:</strong> Discussing how individuals can protect personal information online.</li>
-              <li className="flex items-start gap-2"><span className="text-error mt-1">▹</span> <strong>Password Hygiene:</strong> Reinforcing strong passwords, password managers, and account security habits.</li>
-              <li className="flex items-start gap-2"><span className="text-error mt-1">▹</span> <strong>Multi-Factor Authentication:</strong> Encouraging MFA as a practical defense against account compromise.</li>
-              <li className="flex items-start gap-2"><span className="text-error mt-1">▹</span> <strong>Risk Communication:</strong> Translating technical cybersecurity topics into clear, audience-friendly explanations.</li>
-              <li className="flex items-start gap-2"><span className="text-error mt-1">▹</span> <strong>Public Education:</strong> Using media and student-led outreach to improve community cyber awareness.</li>
-            </ul>
-          </div>
-        </section>
-      </div>
-
-      <section className="mb-16">
-        <h2 className="font-terminal-heading text-2xl text-on-surface mb-6 border-b border-surface-variant pb-3 flex items-center gap-3">
-          <span className="text-tertiary-fixed">&gt;</span> research.case_study()
-        </h2>
-        <div className="bg-surface-container rounded-lg border border-outline-variant p-6 md:p-8">
-          <div className="flex justify-between items-start mb-6 border-b border-surface-variant pb-4">
-            <h3 className="text-2xl font-terminal-heading text-tertiary-fixed">
-              Research Case Study: Building Power Skills Through Cybersecurity Awareness
-            </h3>
-            <span className="hidden md:inline-block text-xs font-code-sm bg-tertiary-fixed/20 text-tertiary-fixed px-3 py-1 rounded border border-tertiary-fixed/30">Research Study</span>
-          </div>
-          
-          <p className="text-on-surface-variant leading-relaxed text-lg mb-8">
-            This project was also developed into a research case study examining how a student-led cybersecurity radio show can strengthen power skills. The study found that communication, teamwork, and collaboration are essential for cybersecurity readiness and can be developed through experiential projects where students practice explaining technical topics to broad audiences.
-          </p>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-            <div className="bg-surface-container-high rounded p-5 border-l-2 border-tertiary-fixed">
-              <h4 className="text-on-surface font-semibold mb-3 flex items-center gap-2">
-                <FileText size={16} className="text-tertiary-fixed" /> Methods
-              </h4>
-              <ul className="space-y-2 text-on-surface-variant text-sm">
-                <li className="flex items-start gap-2"><span className="text-tertiary-fixed mt-1 text-xs">■</span> Student-led experiential project at Kean University</li>
-                <li className="flex items-start gap-2"><span className="text-tertiary-fixed mt-1 text-xs">■</span> Spring 2026</li>
-                <li className="flex items-start gap-2"><span className="text-tertiary-fixed mt-1 text-xs">■</span> Five undergraduate cybersecurity students</li>
-                <li className="flex items-start gap-2"><span className="text-tertiary-fixed mt-1 text-xs">■</span> Live 30-minute cybersecurity awareness broadcast</li>
-                <li className="flex items-start gap-2"><span className="text-tertiary-fixed mt-1 text-xs">■</span> Audience questions gathered through campus outreach</li>
-                <li className="flex items-start gap-2"><span className="text-tertiary-fixed mt-1 text-xs">■</span> Data from reflections, surveys, planning documents, and debrief notes</li>
-                <li className="flex items-start gap-2"><span className="text-tertiary-fixed mt-1 text-xs">■</span> Qualitative case study approach with inductive thematic analysis</li>
-              </ul>
-            </div>
-            
-            <div className="bg-surface-container-high rounded p-5 border-l-2 border-primary-container">
-              <h4 className="text-on-surface font-semibold mb-3 flex items-center gap-2">
-                <Server size={16} className="text-primary-container" /> Results
-              </h4>
-              <ul className="space-y-2 text-on-surface-variant text-sm">
-                <li className="flex items-start gap-2"><span className="text-primary-container mt-1 text-xs">■</span> Improved ability to explain technical concepts</li>
-                <li className="flex items-start gap-2"><span className="text-primary-container mt-1 text-xs">■</span> Stronger collaboration and teamwork</li>
-                <li className="flex items-start gap-2"><span className="text-primary-container mt-1 text-xs">■</span> Increased confidence speaking to a broad audience</li>
-                <li className="flex items-start gap-2"><span className="text-primary-container mt-1 text-xs">■</span> Greater accountability during planning and execution</li>
-                <li className="flex items-start gap-2"><span className="text-primary-container mt-1 text-xs">■</span> Better understanding of how interpersonal skills complement technical cybersecurity training</li>
-              </ul>
-            </div>
-          </div>
-          
-          <div className="bg-surface-container-high rounded p-5 border-l-2 border-secondary-fixed">
-            <h4 className="text-on-surface font-semibold mb-2 text-secondary-fixed">Conclusion</h4>
-            <p className="text-on-surface-variant text-sm mb-2">
-              Media-based, peer-driven cybersecurity projects can build communication, teamwork, and professional readiness.
-            </p>
-            <p className="text-on-surface-variant text-sm">
-              The project shows that cybersecurity education should develop both technical knowledge and human-centered communication skills.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section className="mb-16">
-        <h2 className="font-terminal-heading text-2xl text-on-surface mb-6 border-b border-surface-variant pb-3 flex items-center gap-3">
-          <span className="text-primary-container">&gt;</span> research.poster()
-        </h2>
-        <div className="bg-surface-container rounded-lg border border-outline-variant p-8 flex flex-col items-center justify-center text-center">
-          <div className="w-16 h-16 bg-primary-container/10 rounded-full flex items-center justify-center mb-4">
-            <FileText size={32} className="text-primary-container" />
-          </div>
-          <h3 className="text-xl font-terminal-heading text-on-surface mb-2">
-            Case Study: Creation of a Student-Driven Radio Talk Show
-          </h3>
-          <p className="text-on-surface-variant mb-6 max-w-2xl">
-            View the official research poster detailing the project's methodologies, findings, and the impact of the C.Y.B.E.R. Radio show on developing power skills among cybersecurity students.
-          </p>
+        <div className="flex flex-wrap gap-4 items-center">
+          <a 
+            href="https://www.kean.edu/academics/college-business-and-public-management/center-cybersecurity-5"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-5 py-2.5 bg-cyber-cyan/10 text-cyber-cyan border border-cyber-cyan/30 hover:border-cyber-cyan hover:bg-cyber-cyan/20 transition-all rounded-lg text-sm font-semibold"
+          >
+            Official Kean C.Y.B.E.R. Page <ExternalLink size={15} />
+          </a>
           <a 
             href="/projects/cyber-radio/Kean%20C.Y.B.E.R%20Research%20Poster.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-surface-container-high text-primary-container border border-primary-container/30 hover:border-primary-container hover:bg-primary-container/10 transition-colors rounded font-code-sm font-semibold"
+            className="inline-flex items-center gap-2 px-5 py-2.5 bg-dark-900 text-slate-200 border border-dark-700 hover:border-dark-600 transition-all rounded-lg text-sm font-semibold"
           >
-            <Download size={18} /> View Research Poster
+            <Download size={15} /> View Academic Research Poster
           </a>
+        </div>
+      </header>
+
+      {/* Overview */}
+      <section className="mb-12">
+        <div className="bg-dark-900/80 rounded-xl border border-dark-700/80 p-6 md:p-8 backdrop-blur-sm relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-cyber-cyan/5 rounded-full blur-3xl pointer-events-none" />
+          <h2 className="text-xl font-bold text-slate-100 mb-4 flex items-center gap-2 font-mono">
+            <span className="text-cyber-cyan">&gt;</span> 01_PROJECT_CONCEPT_&_ORIGIN
+          </h2>
+          <p className="text-slate-300 leading-relaxed text-base mb-4">
+            Technical defense is only half the cybersecurity equation; human behavior and organizational communication constitute the front line of defense. <strong>C.Y.B.E.R. ("Connecting Your Brain to Everyday Risks")</strong> was conceived at the Kean Center for Cybersecurity to make digital safety intuitive, conversational, and directly responsive to campus community members.
+          </p>
+          <p className="text-slate-300 leading-relaxed text-base">
+            Broadcast over Kean University's WKNJ 90.3 FM radio station, the initiative provided an interactive platform where students addressed real questions from listeners regarding phishing lures, credential security, data privacy, social engineering, and practical device protection. The broadcast initiative subsequent expanded into a formal academic case study investigating how broadcast experiential learning accelerates crucial non-technical "power skills."
+          </p>
         </div>
       </section>
 
-      <section className="mb-16">
-        <h2 className="font-terminal-heading text-2xl text-on-surface mb-6 border-b border-surface-variant pb-3 flex items-center gap-3">
-          <span className="text-secondary-fixed">&gt;</span> official.links()
+      {/* Responsibilities & Concepts */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+        <section className="bg-dark-900/80 rounded-xl border border-dark-700/80 p-6 md:p-8">
+          <h2 className="text-xl font-bold text-slate-100 mb-6 flex items-center gap-2 font-mono border-b border-dark-700 pb-3">
+            <Mic size={20} className="text-cyber-cyan" />
+            <span className="text-cyber-cyan">&gt;</span> Broadcast & Research Contributions
+          </h2>
+          <ul className="space-y-3.5 text-sm text-slate-300">
+            <li className="flex items-start gap-2.5">
+              <span className="text-cyber-cyan font-mono mt-0.5">01.</span>
+              <span><strong>Live Broadcast Delivery:</strong> Co-hosted a 30-minute live radio segment addressing real questions collected from undergraduate students, staff, and local listeners.</span>
+            </li>
+            <li className="flex items-start gap-2.5">
+              <span className="text-cyber-cyan font-mono mt-0.5">02.</span>
+              <span><strong>Technical Risk Translation:</strong> Distilled complex cybersecurity mechanisms (e.g., SIM swapping, OAuth phishing, password entropy) into practical, memorable metaphors.</span>
+            </li>
+            <li className="flex items-start gap-2.5">
+              <span className="text-cyber-cyan font-mono mt-0.5">03.</span>
+              <span><strong>Collaborative Rehearsal & Coordination:</strong> Coordinated with co-hosts, assigning topic coverage, anticipating live callers, and maintaining disciplined segment timing.</span>
+            </li>
+            <li className="flex items-start gap-2.5">
+              <span className="text-cyber-cyan font-mono mt-0.5">04.</span>
+              <span><strong>Qualitative Data Collection:</strong> Participated in post-show debriefs, surveys, and reflections that provided raw data for the academic case study on power skill development.</span>
+            </li>
+          </ul>
+        </section>
+
+        <section className="bg-dark-900/80 rounded-xl border border-dark-700/80 p-6 md:p-8">
+          <h2 className="text-xl font-bold text-slate-100 mb-6 flex items-center gap-2 font-mono border-b border-dark-700 pb-3">
+            <ShieldCheck size={20} className="text-cyber-emerald" />
+            <span className="text-cyber-emerald">&gt;</span> Security Topics Communicated
+          </h2>
+          <ul className="space-y-3.5 text-sm text-slate-300">
+            <li className="flex items-start gap-2.5">
+              <span className="text-cyber-emerald font-mono mt-0.5">▹</span>
+              <div>
+                <strong className="text-slate-100">Social Engineering & Phishing:</strong> Dissecting emotional urgency, fake university alerts, and how to inspect sender headers and URLs.
+              </div>
+            </li>
+            <li className="flex items-start gap-2.5">
+              <span className="text-cyber-emerald font-mono mt-0.5">▹</span>
+              <div>
+                <strong className="text-slate-100">Multi-Factor Authentication (MFA):</strong> Explaining why passwords alone fail, demystifying authenticator apps, and warning against push-bombing fatigue.
+              </div>
+            </li>
+            <li className="flex items-start gap-2.5">
+              <span className="text-cyber-emerald font-mono mt-0.5">▹</span>
+              <div>
+                <strong className="text-slate-100">Digital Footprint & Privacy:</strong> Educating users on mobile app permissions, geolocation sharing, and managing public social media exposure.
+              </div>
+            </li>
+            <li className="flex items-start gap-2.5">
+              <span className="text-cyber-emerald font-mono mt-0.5">▹</span>
+              <div>
+                <strong className="text-slate-100">Credential Management:</strong> Championing password managers, passphrases, and discontinuing risky password reuse across personal and academic portals.
+              </div>
+            </li>
+          </ul>
+        </section>
+      </div>
+
+      {/* Academic Research Case Study Breakdown */}
+      <section className="mb-12">
+        <h2 className="text-xl font-bold text-slate-100 mb-6 flex items-center gap-2 font-mono">
+          <span className="text-cyber-cyan">&gt;</span> 02_QUALITATIVE_RESEARCH_CASE_STUDY
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="bg-surface-container rounded-lg border border-outline-variant p-6 flex flex-col h-full hover:border-secondary-fixed transition-colors relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-24 h-24 bg-secondary opacity-5 blur-[40px] rounded-full"></div>
-            <h3 className="text-on-surface font-semibold text-lg mb-2 z-10">Official Kean C.Y.B.E.R. Page</h3>
-            <p className="text-on-surface-variant flex-1 mb-6 z-10">
-              Kean University page for C.Y.B.E.R. — Connecting Your Brain to Everyday Risks, a student-powered cybersecurity radio show hosted through the Kean Center for Cybersecurity.
-            </p>
-            <div className="z-10">
-              <a 
-                href="https://www.kean.edu/academics/college-business-and-public-management/center-cybersecurity-5"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-surface-container-high text-secondary-fixed border border-secondary-fixed/30 hover:border-secondary-fixed rounded transition-colors font-code-sm"
-              >
-                Visit Official Page <ExternalLink size={16} />
-              </a>
+        <div className="bg-dark-900/80 rounded-xl border border-dark-700/80 p-6 md:p-8">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6 border-b border-dark-700 pb-4">
+            <div>
+              <h3 className="text-lg font-bold text-slate-100">
+                Building Power Skills in Cybersecurity Through Experiential Broadcast Outreach
+              </h3>
+              <p className="text-sm text-slate-400 font-mono">Center for Cybersecurity Research Group // Spring 2026</p>
+            </div>
+            <span className="text-xs font-mono bg-cyber-cyan/10 text-cyber-cyan px-3 py-1 rounded border border-cyber-cyan/30">
+              ACADEMIC_CASE_STUDY
+            </span>
+          </div>
+
+          <p className="text-slate-300 text-sm leading-relaxed mb-6">
+            Cybersecurity hiring managers consistently emphasize that technical prowess must be paired with communication, collaboration, and accountability. This case study analyzed the learning trajectory of five undergraduate cybersecurity students designing and executing a live broadcast.
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="p-4 rounded-lg bg-dark-950/60 border border-dark-800">
+              <h4 className="text-sm font-semibold text-cyber-cyan font-mono uppercase tracking-wider mb-2 flex items-center gap-2">
+                <FileText size={16} /> Research Methodology
+              </h4>
+              <ul className="space-y-2 text-xs text-slate-400 leading-relaxed">
+                <li>• <strong>Cohort:</strong> 5 undergraduate cybersecurity students.</li>
+                <li>• <strong>Format:</strong> Live 30-minute broadcast on WKNJ 90.3 FM.</li>
+                <li>• <strong>Data Sources:</strong> Qualitative student reflections, pre/post broadcast surveys, planning documentation, and instructor debrief logs.</li>
+                <li>• <strong>Analysis:</strong> Inductive thematic coding to identify growth across core professional competencies.</li>
+              </ul>
+            </div>
+
+            <div className="p-4 rounded-lg bg-dark-950/60 border border-dark-800">
+              <h4 className="text-sm font-semibold text-cyber-emerald font-mono uppercase tracking-wider mb-2 flex items-center gap-2">
+                <Users size={16} /> Documented Outcomes
+              </h4>
+              <ul className="space-y-2 text-xs text-slate-400 leading-relaxed">
+                <li>• <strong>Translational Agility:</strong> Demonstrated measurable improvement in explaining abstract security principles without relying on jargon.</li>
+                <li>• <strong>Team Cohesion:</strong> Accelerated trust and mutual accountability under unscripted live broadcast conditions.</li>
+                <li>• <strong>Confidence:</strong> Reduced public speaking anxiety when addressing non-technical stakeholders—critical for SOC analyst reporting.</li>
+              </ul>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="mb-16">
-        <h2 className="font-terminal-heading text-2xl text-on-surface mb-6 border-b border-surface-variant pb-3 flex items-center gap-3">
-          <span className="text-primary-container">&gt;</span> tech_environment.sys()
-        </h2>
-        <div className="flex flex-wrap gap-3">
-          {techStack.map(tech => (
-            <span key={tech} className="px-3 py-1.5 bg-surface-container text-primary-container font-code-sm text-sm rounded border border-primary-container/30 hover:border-primary-container transition-colors shadow-[0_0_10px_rgba(40,160,250,0.1)]">
-              {tech}
-            </span>
-          ))}
-        </div>
-      </section>
+      {/* Tech Stack & Skills */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+        <section className="bg-dark-900/80 rounded-xl border border-dark-700/80 p-6">
+          <h2 className="text-base font-bold text-slate-100 mb-4 font-mono text-cyber-cyan flex items-center gap-2">
+            <Radio size={18} /> Outreach & Media Tools
+          </h2>
+          <div className="flex flex-wrap gap-2">
+            {techStack.map(tech => (
+              <span key={tech} className="px-3 py-1 bg-dark-950 text-slate-300 font-mono text-xs rounded border border-dark-700">
+                {tech}
+              </span>
+            ))}
+          </div>
+        </section>
 
-      <section className="mb-16">
-        <h2 className="font-terminal-heading text-2xl text-on-surface mb-6 border-b border-surface-variant pb-3 flex items-center gap-3">
-          <span className="text-secondary-fixed">&gt;</span> key_skills.val()
-        </h2>
-        <div className="flex flex-wrap gap-2">
-          {keySkills.map(skill => (
-            <span key={skill} className="px-3 py-1.5 bg-surface-container-high text-on-surface font-code-sm text-sm rounded border border-outline-variant">
-              {skill}
-            </span>
-          ))}
-        </div>
-      </section>
+        <section className="bg-dark-900/80 rounded-xl border border-dark-700/80 p-6">
+          <h2 className="text-base font-bold text-slate-100 mb-4 font-mono text-cyber-emerald flex items-center gap-2">
+            <Users size={18} /> Core Competencies
+          </h2>
+          <div className="flex flex-wrap gap-2">
+            {keySkills.map(skill => (
+              <span key={skill} className="px-3 py-1 bg-dark-950 text-slate-300 font-mono text-xs rounded border border-dark-700">
+                {skill}
+              </span>
+            ))}
+          </div>
+        </section>
+      </div>
 
       <BackToProjects position="bottom" />
     </div>
