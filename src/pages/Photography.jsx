@@ -1,114 +1,143 @@
-import { useState, useEffect } from 'react';
-import { Camera, X, ZoomIn, Eye } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
+import { ChevronLeft, ChevronRight, X } from 'lucide-react';
+import Seo from '../components/Seo';
+import SignalBar from '../components/ui/SignalBar';
+import { photos } from '../data/photos';
 
-export default function Photography() {
-  const [selectedImage, setSelectedImage] = useState(null);
+const total = photos.length;
 
-  const fileIds = [
-    1, 2, 3, 5, 6, 7, 8, 9, 10, 15, 16, 18, 19, 20, 21, 22, 23, 24, 25, 26, 
-    27, 28, 29, 30, 32, 33, 34, 35, 37, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51
-  ];
-
-  const photos = fileIds.map(id => ({
-    id,
-    src: `/images/joel-photography/photo-${id}.jpg`,
-    alt: `Photography portfolio frame ${id} by Joel Leiva`
-  })).reverse();
+/** Native modal dialog: showModal() gives the focus trap, Escape and the top layer. */
+function Lightbox({ index, onNavigate, onClose }) {
+  const ref = useRef(null);
+  const photo = photos[index];
 
   useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === 'Escape') setSelectedImage(null);
-    };
-    if (selectedImage) {
-      window.addEventListener('keydown', handleKeyDown);
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
+    const dialog = ref.current;
+    if (dialog && !dialog.open) {
+      if (typeof dialog.showModal === 'function') dialog.showModal();
+      else dialog.setAttribute('open', '');
     }
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-      document.body.style.overflow = 'unset';
-    };
-  }, [selectedImage]);
+  }, []);
+
+  const close = () => {
+    const dialog = ref.current;
+    if (dialog?.open && typeof dialog.close === 'function') dialog.close();
+    else onClose();
+  };
+
+  const step = (delta) => onNavigate((index + delta + total) % total);
+
+  const onKeyDown = (e) => {
+    if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      step(-1);
+    } else if (e.key === 'ArrowRight') {
+      e.preventDefault();
+      step(1);
+    }
+  };
+
+  // A click whose target is the dialog itself landed on the backdrop (the content fills the box).
+  const onClick = (e) => {
+    if (e.target === ref.current) close();
+  };
 
   return (
-    <div className="max-w-7xl mx-auto pb-16 px-4">
-      {/* Header */}
-      <header className="mb-12 border-l-4 border-cyber-cyan pl-6 py-2">
-        <div className="flex items-center gap-2 text-cyber-cyan font-mono text-xs mb-3 uppercase tracking-wider">
-          <span className="opacity-70">&gt;</span> creative.discipline // visual_archive
+    <dialog
+      ref={ref}
+      aria-label={`Photograph ${index + 1} of ${total}`}
+      onClose={onClose}
+      onKeyDown={onKeyDown}
+      onClick={onClick}
+      className="m-auto max-h-[96svh] max-w-[min(96vw,1600px)] overflow-hidden rounded-card border border-rule bg-paper-3 p-0 text-ink backdrop:bg-paper-3 backdrop:opacity-95"
+    >
+      <div className="flex flex-col">
+        <div className="flex items-center justify-between gap-4 border-b border-rule px-4 py-3">
+          <p className="measured text-ink-2" aria-live="polite">
+            Photograph {index + 1} of {total}
+          </p>
+          <button type="button" className="btn min-h-0 px-3 py-1.5 text-sm" onClick={close}>
+            <X size={16} aria-hidden="true" />
+            Close
+          </button>
         </div>
-        <h1 className="text-3xl md:text-4xl font-bold text-slate-100 mb-4 tracking-tight flex items-center gap-3">
-          <Camera className="text-cyber-cyan" size={32} />
-          Visual Archive & Photography
-        </h1>
-        <p className="text-lg text-slate-300 max-w-3xl leading-relaxed">
-          A curated collection of street, architectural, and landscape photography. Outside of cybersecurity and systems defense, photography cultivates spatial awareness, meticulous attention to detail, and patience—disciplines that directly enrich analytical problem-solving.
+        <img
+          key={photo.id}
+          src={photo.large}
+          alt={photo.alt}
+          width={photo.width}
+          height={photo.height}
+          decoding="async"
+          className="mx-auto block h-auto max-h-[calc(96svh-8rem)] w-auto max-w-full object-contain"
+        />
+        <div className="flex items-center justify-between gap-4 border-t border-rule px-4 py-3">
+          <button type="button" className="btn min-h-0 px-3 py-1.5 text-sm" onClick={() => step(-1)}>
+            <ChevronLeft size={16} aria-hidden="true" />
+            Previous
+          </button>
+          <p className="hidden text-sm text-muted sm:block">Arrow keys move between photos.</p>
+          <button type="button" className="btn min-h-0 px-3 py-1.5 text-sm" onClick={() => step(1)}>
+            Next
+            <ChevronRight size={16} aria-hidden="true" />
+          </button>
+        </div>
+      </div>
+    </dialog>
+  );
+}
+
+export default function Photography() {
+  const [open, setOpen] = useState(null);
+  const opener = useRef(null);
+  const thumbs = useRef([]);
+
+  const openAt = (i) => {
+    opener.current = i;
+    setOpen(i);
+  };
+
+  const onClose = () => {
+    setOpen(null);
+    // Return focus to the thumbnail that opened the lightbox.
+    const button = thumbs.current[opener.current];
+    if (button) button.focus();
+  };
+
+  return (
+    <>
+      <Seo title="Photography" description="Street, architectural and landscape photography by Joel Leiva." />
+      <section className="container pt-16 pb-[var(--section-gap-s)] sm:pt-24 lg:pt-[var(--section-gap-s)]">
+        <SignalBar className="mb-8" />
+        <h1>Photography</h1>
+        <p className="lead mt-6 max-w-[56ch] text-ink-2">
+          Street, architectural and landscape photography. It trains the attention to detail and patience I bring to security work.
         </p>
-
-        <div className="flex items-center gap-4 mt-6 text-xs font-mono text-slate-400">
-          <span className="px-2.5 py-1 bg-dark-900 border border-dark-700 rounded text-cyber-cyan">
-            {photos.length} Archived Frames
-          </span>
-          <span className="text-slate-500">•</span>
-          <span>Click any image for expanded view</span>
-        </div>
-      </header>
-
-      {/* Photo Gallery Grid */}
-      <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {photos.map(photo => (
-          <article 
-            key={photo.id} 
-            onClick={() => setSelectedImage(photo)}
-            className="cursor-pointer bg-dark-900 rounded-lg border border-dark-800 overflow-hidden group hover:border-cyber-cyan/50 hover:shadow-lg hover:shadow-cyber-cyan/10 transition-all duration-300 aspect-square relative"
-          >
-            <img 
-              alt={photo.alt} 
-              className="object-cover w-full h-full opacity-85 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500" 
-              src={photo.src} 
-              loading="lazy"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-dark-950/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3 justify-between">
-              <span className="text-xs font-mono text-slate-300 flex items-center gap-1">
-                <Eye size={12} className="text-cyber-cyan" /> Frame #{photo.id}
-              </span>
-              <ZoomIn size={16} className="text-cyber-cyan" />
-            </div>
-          </article>
-        ))}
       </section>
 
-      <div className="my-16 font-mono text-xs text-slate-500 text-center tracking-widest uppercase">
-        --- End of Visual Archive ---
-      </div>
+      <section aria-label="Photo archive" className="container">
+        <p className="text-sm text-muted">
+          <span className="measured text-ink-2">{total}</span> photographs, newest first. Select one to open it full size.
+        </p>
+        <ul className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4" role="list">
+          {photos.map((photo, i) => (
+            <li key={photo.id} className="min-w-0">
+              <button
+                type="button"
+                ref={(el) => {
+                  thumbs.current[i] = el;
+                }}
+                onClick={() => openAt(i)}
+                aria-label={`Open photograph ${i + 1} of ${total}`}
+                className="block aspect-square w-full overflow-hidden rounded-card border border-rule bg-paper-2 transition-colors duration-short ease-out hover:border-accent focus-visible:border-accent motion-reduce:transition-none"
+              >
+                <img src={photo.thumb} srcSet={`${photo.thumbSm} 320w, ${photo.thumb} 640w`} sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw" alt="" width="640" height="640" loading={i < 4 ? 'eager' : 'lazy'} fetchPriority={i === 0 ? 'high' : undefined} decoding="async" className="h-full w-full object-cover" />
+              </button>
+            </li>
+          ))}
+        </ul>
+      </section>
 
-      {/* Lightbox Modal */}
-      {selectedImage && (
-        <div 
-          className="fixed inset-0 z-50 flex items-center justify-center bg-dark-950/95 backdrop-blur-md p-4 animate-in fade-in duration-200"
-          onClick={() => setSelectedImage(null)}
-        >
-          <div className="relative max-w-full max-h-full flex flex-col items-center">
-            <button 
-              className="absolute -top-12 right-0 text-slate-300 hover:text-white transition-colors font-mono text-xs flex items-center gap-1.5 bg-dark-900 border border-dark-700 hover:border-cyber-cyan px-3 py-1.5 rounded-lg shadow-lg"
-              onClick={() => setSelectedImage(null)}
-              aria-label="Close image modal"
-            >
-              <X size={14} /> ESC / CLOSE
-            </button>
-            <img 
-              src={selectedImage.src} 
-              alt={selectedImage.alt} 
-              className="max-w-[92vw] max-h-[82vh] object-contain border border-dark-700 rounded-lg shadow-2xl shadow-black/80" 
-              onClick={(e) => e.stopPropagation()}
-            />
-            <div className="mt-3 text-xs font-mono text-slate-400">
-              Frame #{selectedImage.id} — Joel Leiva Photography Archive
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
+      {open !== null && <Lightbox index={open} onNavigate={setOpen} onClose={onClose} />}
+    </>
   );
 }

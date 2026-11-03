@@ -1,21 +1,50 @@
 <!doctype html>
-<html lang="en" className="dark scroll-smooth">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0c1322" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    <meta name="description" content="Joel Leiva – Junior Security Operations (SecOps) Analyst & Cybersecurity Student at Kean University. SIEM monitoring, threat intelligence, incident investigation, and network defense infrastructure." />
+    <link href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@400;500&family=Atkinson+Hyperlegible+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <!-- Defaults for crawlers and link previews that do not run JS; each route replaces title/description/canonical at runtime. -->
+    <title data-static>Joel Leiva | Security operations portfolio</title>
+    <meta data-static name="description" content="Joel Leiva, Junior Security Operations Analyst at Kean University: SIEM monitoring, alert triage, threat intelligence research and network defense labs." />
     <meta name="author" content="Joel Joseph Leiva Castillo" />
-    <meta property="og:title" content="Joel Leiva | Security Operations & Cybersecurity Portfolio" />
-    <meta property="og:description" content="Enterprise SecOps, SIEM alert triage, threat intelligence research, and network security infrastructure by Joel Leiva." />
     <meta property="og:type" content="website" />
-    <title>Joel Leiva | Security Operations &amp; Cybersecurity Portfolio</title>
+    <meta property="og:site_name" content="Joel Leiva" />
+    <meta data-static property="og:title" content="Joel Leiva | Security operations portfolio" />
+    <meta data-static property="og:description" content="SIEM alert triage, threat intelligence research and network defense labs by Joel Leiva." />
+    <meta property="og:image" content="https://joel-website.vercel.app/images/og-joel-leiva.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Joel Leiva, portrait" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="https://joel-website.vercel.app/images/og-joel-leiva.jpg" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Joel Joseph Leiva Castillo",
+        "alternateName": "Joel Leiva",
+        "jobTitle": "Junior Security Operations Analyst",
+        "url": "https://joel-website.vercel.app/",
+        "image": "https://joel-website.vercel.app/images/og-joel-leiva.jpg",
+        "email": "mailto:leivajo@kean.edu",
+        "worksFor": { "@type": "CollegeOrUniversity", "name": "Kean University" },
+        "alumniOf": { "@type": "CollegeOrUniversity", "name": "Kean University" },
+        "address": { "@type": "PostalAddress", "addressLocality": "Elizabeth", "addressRegion": "NJ", "addressCountry": "US" },
+        "sameAs": ["https://www.linkedin.com/in/joel-leiva0410/", "https://github.com/Joel-J-Leiva"]
+      }
+    </script>
   </head>
-  <body class="bg-[#080c14] text-slate-100 antialiased selection:bg-cyan-500 selection:text-black">
+  <body>
     <div id="root"></div>
+    <noscript>
+      <p style="padding: 24px">Joel Leiva, Junior Security Operations Analyst at Kean University. Email leivajo@kean.edu, or see linkedin.com/in/joel-leiva0410. This site needs JavaScript for the full portfolio.</p>
+    </noscript>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

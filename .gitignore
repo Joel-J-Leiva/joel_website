@@ -41,3 +41,6 @@ pdf_contents_clean.txt
 
 # Vite local config overrides
 *.local
+
+# Hallmark design-tool records and screenshots (local only)
+.hallmark/
