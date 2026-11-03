@@ -1,113 +1,73 @@
-# Joel Leiva — Cybersecurity Portfolio
+# Joel Leiva: security operations portfolio
 
-A personal cybersecurity portfolio website showcasing projects, achievements, skills, and photography. Built with a dark terminal/hacker aesthetic using React, Vite, and Tailwind CSS.
+Personal portfolio for Joel Leiva: projects, experience, certifications, about, photography and contact. A static React single-page app.
 
-## 🖥️ Tech Stack
+## Tech stack
 
-- **Framework:** React 19 with React Router v7
-- **Build Tool:** Vite 8
-- **Styling:** Tailwind CSS v3 with a custom design system
-- **Icons:** Lucide React
-- **Language:** JavaScript (JSX)
+- React 19 with React Router 7 (data router, lazy-loaded routes)
+- Vite 8
+- Tailwind CSS 3.4.19 (pinned) with the Console design system: tokens in `src/styles/`, component classes in `src/index.css`, shared UI in `src/components/ui/`
+- Data-driven content: all copy and facts live in `src/data/`; pages are layout over data
+- Vitest, Testing Library and jsdom for tests
+- Lucide React icons
 
-## 📄 Pages
+## Routes
 
 | Page | Route |
 |------|-------|
 | Home | `/` |
-| About | `/about` |
-| Projects | `/projects` |
-| Photography | `/photography` |
-| Achievements | `/achievements` |
+| Work (project index) | `/projects` |
+| Project case study | `/projects/:slug` (one per entry in `src/data/projects/index.js`) |
 | NCyTE Career Challenge | `/projects/ncyte-career-challenge` |
-| DFIR Triage Station | `/projects/dfir-triage-station` |
-| Pi-hole DNS Filtering | `/projects/pi-hole-dns-filtering` |
-| Home Lab Networking | `/projects/home-lab-networking` |
-| Physical Server & NVR | `/projects/physical-server-nvr` |
-| NGO Threat Intel | `/projects/ngo-threat-intel` |
-| C.Y.B.E.R. Radio | `/projects/cyber-radio` |
+| Wazuh SIEM/XDR lab | `/projects/wazuh-siem-lab` |
+| DFIR triage station | `/projects/dfir-triage-station` |
+| Home lab networking | `/projects/home-lab-networking` |
+| Pi-hole DNS filtering | `/projects/pi-hole-dns-filtering` |
+| Physical server and NVR | `/projects/physical-server-nvr` |
+| NPCIR threat intelligence | `/projects/ngo-threat-intel` |
+| C.Y.B.E.R. radio | `/projects/cyber-radio` |
+| Experience | `/experience` |
+| Certifications | `/achievements` |
+| About | `/about` |
+| Photography | `/photography` |
+| Contact | `/contact` |
+| Not found (404, `noindex`) | any other path |
 
-## 🚀 Getting Started
+## Editing content
 
-### Prerequisites
-- [Node.js](https://nodejs.org/) v18 or higher
-- npm (comes with Node.js)
+| File | Holds |
+|------|-------|
+| `src/data/site.js` | `SITE_URL`, site name, default meta description |
+| `src/data/profile.js` | Name, role, contact details, links (resume, LinkedIn, GitHub), bio, home readings, hero sentence |
+| `src/data/nav.js` | Primary nav and footer link columns |
+| `src/data/experience.js` | Roles and dates for the experience trail |
+| `src/data/projects/index.js` | Project index: slug, title, category, status, summary, tags, cover, `featured` flag |
+| `src/data/projects/<slug>.js` | Full case-study content for one project, loaded on demand |
 
-### Install Dependencies
+Other pages read their own modules in `src/data/`.
+
+To add a project: add an entry to `projects` in `src/data/projects/index.js`, create `src/data/projects/<slug>.js` with its case-study content, put images under `public/projects/<slug>/`, and add the URL to `public/sitemap.xml`. Set `featured: true` to show it on the home page.
+
+## Scripts
 
 ```bash
 npm install
+npm run dev              # dev server at http://localhost:5173
+npm run build            # production build to dist/
+npm run preview          # serve the production build
+npm run lint             # ESLint
+npm test                 # Vitest (single run); npm run test:watch to watch
+npm run optimize:images  # regenerate WebP images with sharp (manual; outputs are committed)
 ```
 
-### Run Locally (Development)
+Node 18 or newer. No environment variables are needed; there is no backend (the contact form opens a `mailto:` draft).
 
-```bash
-npm run dev
-```
+## Deployment
 
-Open [http://localhost:5173](http://localhost:5173) in your browser.
+Deployed on Vercel. `vercel.json` adds an SPA rewrite so deep links such as `/projects/wazuh-siem-lab` load `index.html` (static files in `public/` are served first, so PDFs and images still resolve), long-cache headers for hashed `/assets/*`, and security headers including a Content-Security-Policy. If you add a third-party script, font or image host, update the CSP there.
 
-### Build for Production
+Production origin: `SITE_URL` in `src/data/site.js` (`https://joel-leiva-portfolio.vercel.app`) is repeated in `index.html`, `public/robots.txt` and `public/sitemap.xml`; change all four together.
 
-```bash
-npm run build
-```
+## Credits
 
-Output will be in the `dist/` folder.
-
-### Preview Production Build
-
-```bash
-npm run preview
-```
-
-### Lint
-
-```bash
-npm run lint
-```
-
-## 🌐 Deployment
-
-This project is a static React/Vite SPA and can be deployed to:
-
-- **Vercel** (recommended) — connect your GitHub repo and deploy automatically
-- **Netlify** — connect your GitHub repo, set build command to `npm run build`, publish directory to `dist`
-- **GitHub Pages** — build and deploy the `dist/` folder
-
-> **Note:** When deploying to Vercel or Netlify, no environment variables are required for this portfolio site.
-
-## 📁 Project Structure
-
-```
-portfolio_app/
-├── public/
-│   ├── documents/        # Resume and cover letter PDFs
-│   ├── images/           # Photography and portrait images
-│   ├── projects/         # Project-specific images and assets
-│   ├── favicon.svg
-│   └── icons.svg
-├── src/
-│   ├── assets/           # Static assets used in components
-│   ├── components/       # Shared components (Navbar, Footer, etc.)
-│   ├── pages/            # Page components for each route
-│   ├── App.jsx           # Router and route definitions
-│   ├── main.jsx          # React entry point
-│   └── index.css         # Global styles and Tailwind directives
-├── index.html
-├── tailwind.config.js
-├── vite.config.js
-└── package.json
-```
-
-## 🔒 Environment Variables
-
-This portfolio does not require any environment variables. There is no backend or API integration.
-
-If you fork this project and add a backend/contact form, create a `.env` file locally (it is already in `.gitignore` and will not be committed).
-
-## 📝 Credits
-
-- Portfolio designed and developed by **Joel Leiva**
-- Research poster and project documentation authored by Joel Leiva and team contributors
-- Hosted through [Kean University Center for Cybersecurity](https://www.kean.edu/academics/college-business-and-public-management/center-cybersecurity)
+Designed and built by Joel Leiva. Research poster and project documentation by Joel Leiva and team contributors. Hosted through the [Kean University Center for Cybersecurity](https://www.kean.edu/academics/college-business-and-public-management/center-cybersecurity).
