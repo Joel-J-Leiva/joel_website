@@ -188,7 +188,7 @@ Four fresh-context reviewers ran: zoom-out, design critic, implementation readin
 | R7 | Slugs and filter vocabulary unspecified. | **Accepted.** Slugs unchanged: `ncyte-career-challenge`, `wazuh-siem-lab`, `dfir-triage-station`, `home-lab-networking`, `pi-hole-dns-filtering`, `physical-server-nvr`, `ngo-threat-intel`, `cyber-radio`. Filter values = category enum `all | secops | infrastructure | homelab | intel`. "FLIP" dropped: entering rows fade/translate in; nothing else moves. |
 | R8 | Phase 1 not buildable. | **Accepted.** Phase 1 shipped `ProjectCaseStudy` and `NotFound` stubs and `ProjectRow`; build verified before phase 2 started. Old pages are deleted by the agent that replaces them. All shared files (styles, config, primitives, data foundation) are owned by phase 1 only (`docs/designs/BUILD_BRIEF.md`). |
 | R9 | PiHole link target unstated; `--kept` will flag it. | **Accepted.** Becomes `/projects/home-lab-networking`; recorded as an intentional change in the Hallmark stamp. |
-| R10 | Production origin unknown. | **Open, owner.** `SITE_URL = https://joel-website.vercel.app` in `src/data/site.js` (also in `index.html`, `public/sitemap.xml`, `public/robots.txt`), flagged TODO. |
+| R10 | Production origin unknown. | **Open, owner.** `SITE_URL = https://joel-leiva-portfolio.vercel.app` in `src/data/site.js` (also in `index.html`, `public/sitemap.xml`, `public/robots.txt`), flagged TODO. |
 | R11 | Commit each phase (zoom-out M4, design M6). | **Contested.** The owner asked to review on localhost before anything is committed. The work is isolated on branch `refactor/console-redesign`; commits follow owner approval. |
 | R12 | Photography originals (104 MB) still deploy (zoom-out M6). | **Contested.** Originals are never requested by the page (thumbs/large WebP are), so they cost deploy size, not visitor bandwidth. Moving or deleting the owner's photos is the owner's call; listed in the handoff. |
 | R13 | Merge `useCopyToClipboard` into `CopyEmail`; drop `usePrefersReducedMotion` (nits). | **Contested.** The hook keeps the clipboard fallback testable on its own; `usePrefersReducedMotion` subscribes to changes, which an inline `matchMedia` read does not. |
@@ -213,6 +213,6 @@ The EGM drift report (`docs/designs/drift_report.md`) found 13 items, none High.
 ### Follow-ups (not in this change)
 
 1. Prerender the 15 routes so non-JS crawlers and link previews get per-route titles, descriptions and real 404 status.
-2. Confirm the production origin (`SITE_URL`) and replace it in `site.js`, `index.html`, `robots.txt`, `sitemap.xml`.
+2. ~~Confirm the production origin~~ Done: `https://joel-leiva-portfolio.vercel.app` (owner, 2026-11-02).
 3. ESLint's `minimatch` chain has 6 moderate dev-only advisories with no non-breaking fix.
 4. Decide whether the 104 MB of original photographs should keep deploying from `public/`.

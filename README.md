@@ -66,7 +66,7 @@ Node 18 or newer. No environment variables are needed; there is no backend (the 
 
 Deployed on Vercel. `vercel.json` adds an SPA rewrite so deep links such as `/projects/wazuh-siem-lab` load `index.html` (static files in `public/` are served first, so PDFs and images still resolve), long-cache headers for hashed `/assets/*`, and security headers including a Content-Security-Policy. If you add a third-party script, font or image host, update the CSP there.
 
-TODO(owner): confirm the production origin. `SITE_URL` in `src/data/site.js` (`https://joel-website.vercel.app`) is repeated in `index.html`, `public/robots.txt` and `public/sitemap.xml`; change all four together.
+Production origin: `SITE_URL` in `src/data/site.js` (`https://joel-leiva-portfolio.vercel.app`) is repeated in `index.html`, `public/robots.txt` and `public/sitemap.xml`; change all four together.
 
 ## Credits
 
