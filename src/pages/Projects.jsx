@@ -1,7 +1,7 @@
 import { Link, useSearchParams } from 'react-router-dom';
 import Seo from '../components/Seo';
 import ProjectRow from '../components/ProjectRow';
-import SignalBar from '../components/ui/SignalBar';
+import PageHeader from '../components/ui/PageHeader';
 import { toneFor } from '../components/ui/tones';
 import { categories, normalizeCategory, projects } from '../data/projects';
 
@@ -10,9 +10,7 @@ const STAGGER_MS = 50;
 export default function Projects() {
   const [params, setParams] = useSearchParams();
   const filter = normalizeCategory(params.get('filter'));
-  const shown = projects
-    .map((project, i) => ({ project, number: i }))
-    .filter(({ project }) => filter === 'all' || project.category === filter);
+  const shown = projects.filter((project) => filter === 'all' || project.category === filter);
   const activeLabel = categories.find((c) => c.value === filter)?.label;
 
   const choose = (value) => {
@@ -25,13 +23,10 @@ export default function Projects() {
         title="Projects"
         description="Security labs, field tools and research by Joel Leiva: SIEM, network defense, DFIR, DNS filtering and threat intelligence."
       />
-      <section className="container pt-16 pb-[var(--section-gap-s)] sm:pt-24 lg:pt-[var(--section-gap-s)]">
-        <SignalBar className="mb-8" />
-        <h1>Projects</h1>
-        <p className="lead mt-6 max-w-[56ch] text-ink-2">
-          Labs, field tools and research, each written up as a case with what I built and what I learned.
-        </p>
-      </section>
+      <PageHeader
+        title="Projects"
+        lead="Labs, field tools and research, each written up as a case with what I built and what I learned."
+      />
 
       <section aria-labelledby="index-title" className="container">
         <h2 id="index-title" className="visually-hidden">
@@ -39,7 +34,7 @@ export default function Projects() {
         </h2>
         <div className="flex flex-wrap gap-2" role="group" aria-label="Filter projects by area">
           {categories.map((c) => (
-            <button key={c.value} type="button" className={`filter ${toneFor(c.value).pressed}`} aria-pressed={filter === c.value} onClick={() => choose(c.value)}>
+            <button key={c.value} type="button" className={c.value === 'all' ? 'filter' : `filter ${toneFor(c.value).pressed}`} aria-pressed={filter === c.value} onClick={() => choose(c.value)}>
               {c.label}
             </button>
           ))}
@@ -50,11 +45,10 @@ export default function Projects() {
         </p>
 
         <ol key={filter} className="panels mt-6" role="list">
-          {shown.map(({ project, number }, i) => (
+          {shown.map((project, i) => (
             <ProjectRow
               key={project.slug}
               project={project}
-              index={number}
               className="enter"
               style={{ animationDelay: `${i * STAGGER_MS}ms` }}
             />

@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Joel Leiva, Security Operations Analyst</title>
+<meta name="description" content="Joel Leiva, Junior Security Operations Analyst at Kean University IT. I triage SIEM alerts for 25,000+ students, faculty and staff.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0d0d0d;
+  --surface:#121212;
+  --surface-2:#181818;
+  --line:#2a2a2a;
+  --ink:#f2f0ea;
+  --muted:#a9a69c;   /* 8.1:1 on bg */
+  --acid:#c6f432;
+  --acid-ink:#0d0d0d;
+  --rail:88px;
+  --ease:cubic-bezier(.16,1,.3,1);
+  --display:"Anton","Bebas Neue",sans-serif;
+  --serif:"Instrument Serif",Georgia,serif;
+  --sans:"Archivo",system-ui,sans-serif;
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scrollbar-color:#3a3a3a var(--bg);scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:1rem;line-height:1.6;-webkit-font-smoothing:antialiased;caret-color:var(--acid)}
+::selection{background:var(--acid);color:var(--acid-ink)}
+::-webkit-scrollbar{width:10px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:#333;border-radius:10px;border:2px solid var(--bg)}
+::-webkit-scrollbar-thumb:hover{background:var(--acid)}
+a{color:inherit;text-underline-offset:4px;text-decoration-thickness:1px}
+:focus-visible{outline:2px solid var(--acid);outline-offset:4px;border-radius:4px}
+img{display:block;max-width:100%}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.skip{position:absolute;left:16px;top:-60px;background:var(--acid);color:var(--acid-ink);padding:.6rem 1rem;border-radius:999px;font-weight:600;z-index:50;text-decoration:none}
+.skip:focus{top:12px}
+.label{font-size:.7rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase}
+
+/* ---------- Left rail ---------- */
+.rail{position:fixed;inset:0 auto 0 0;width:var(--rail);display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:28px 0 32px;border-right:1px solid var(--line);z-index:20;background:var(--bg)}
+.rail__mark{width:30px;height:30px;color:var(--acid)}
+.rail__status{margin:0;writing-mode:vertical-rl;transform:rotate(180deg);display:flex;align-items:center;gap:14px;font-size:.72rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase}
+.rail__status::after{content:"";width:1px;height:56px;background:var(--line)}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--acid);box-shadow:0 0 0 4px rgba(198,244,50,.16);flex:none}
+.social{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.social a{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);color:var(--ink);transition:background .25s var(--ease),color .25s var(--ease),border-color .25s var(--ease)}
+.social a:hover{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.social svg{width:17px;height:17px}
+
+/* ---------- Shell ---------- */
+.page{margin-left:var(--rail);overflow-x:clip}
+.wrap{max-width:1320px;margin:0 auto;padding:0 clamp(16px,4vw,56px)}
+
+/* ---------- Nav ---------- */
+.nav{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:22px 0;border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-size:1.35rem;letter-spacing:.04em;text-transform:uppercase;text-decoration:none}
+.brand em{font-family:var(--serif);font-style:italic;text-transform:none;letter-spacing:0;font-size:1.45rem;color:var(--muted)}
+.nav__links{display:flex;gap:4px;list-style:none;margin:0;padding:0}
+.nav__links a{display:block;padding:.5rem .85rem;border-radius:999px;font-size:.92rem;font-weight:500;text-decoration:none;color:var(--muted);transition:color .2s,background .2s}
+.nav__links a:hover{color:var(--ink);background:var(--surface-2)}
+.nav__cta{display:inline-flex;align-items:center;gap:8px;padding:.6rem 1.15rem;border:1px solid var(--ink);border-radius:999px;font-weight:600;font-size:.92rem;text-decoration:none;transition:background .25s var(--ease),color .25s var(--ease)}
+.nav__cta:hover{background:var(--ink);color:var(--bg)}
+
+/* ---------- Hero: asymmetric split ---------- */
+.hero{display:grid;grid-template-columns:minmax(0,1.42fr) minmax(0,1fr);align-items:center;gap:clamp(28px,4vw,64px);padding:clamp(20px,3.4vh,40px) 0 clamp(28px,3.6vh,40px)}
+.copy{min-width:0;position:relative;isolation:isolate}
+.copy > *:not(.star-xl){position:relative;z-index:1}
+.star-xl{position:absolute;right:-6%;top:-6%;width:clamp(200px,24vw,360px);height:auto;color:var(--acid);opacity:.55;pointer-events:none;z-index:0}
+.star-xl polygon{fill:none;stroke:currentColor;stroke-width:1.1;vector-effect:non-scaling-stroke}
+.hello{display:inline-flex;align-items:center;gap:10px;margin:0 0 14px;font-size:1.02rem;font-weight:500}
+.hello svg{width:18px;height:18px;color:var(--acid)}
+h1{margin:0;font-weight:400;line-height:.88}
+.h1__a{display:block;font-family:var(--display);font-size:clamp(3rem,6.6vw,6rem);letter-spacing:.005em;text-transform:uppercase;text-wrap:balance}
+.h1__b{display:block;margin-top:.14em;font-family:var(--serif);font-style:italic;font-size:clamp(2.1rem,4.1vw,3.7rem);line-height:1;text-wrap:balance}
+.h1__b .amp{color:var(--acid)}
+.lede{max-width:36ch;margin:22px 0 0;font-size:clamp(1.05rem,1.3vw,1.2rem);line-height:1.55;color:var(--muted)}
+.lede strong{color:var(--ink);font-weight:600}
+.actions{display:flex;flex-wrap:wrap;align-items:center;gap:16px 26px;margin-top:28px}
+.btn-acid{display:inline-flex;align-items:center;gap:12px;padding:.85rem .95rem .85rem 1.5rem;border-radius:999px;background:var(--acid);color:var(--acid-ink);font-weight:700;text-decoration:none;transition:transform .35s var(--ease),box-shadow .35s var(--ease)}
+.btn-acid .ico{display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:var(--acid-ink);color:var(--acid);transition:transform .35s var(--ease)}
+.btn-acid svg{width:15px;height:15px}
+.btn-acid:hover{transform:translateY(-2px);box-shadow:0 14px 28px -12px rgba(198,244,50,.45)}
+.btn-acid:hover .ico{transform:translateY(2px)}
+.btn-round{display:inline-flex;align-items:center;gap:14px;font-weight:600;text-decoration:none;border-radius:999px}
+.btn-round .disc{display:grid;place-items:center;width:54px;height:54px;border-radius:50%;border:1px solid var(--ink);transition:background .3s var(--ease),color .3s var(--ease)}
+.btn-round .disc svg{width:15px;height:15px;margin-left:3px}
+.btn-round:hover .disc{background:var(--ink);color:var(--bg)}
+.btn-round small{display:block;font-weight:400;font-size:.82rem;color:var(--muted)}
+
+/* ---------- Portrait plate (hero 1 treatment, dark/lime) ---------- */
+.plate{position:relative;justify-self:end;width:min(100%,360px);padding-top:7%;isolation:isolate}
+.plate::before{content:"";position:absolute;z-index:-1;width:92%;aspect-ratio:1;right:-16%;top:0;border-radius:50%;background:var(--acid)}
+.photo{position:relative;margin:0;width:80%}
+.photo img{width:100%;height:auto;aspect-ratio:2/3;object-fit:cover;object-position:50% 20%;filter:grayscale(1) contrast(1.08) brightness(.98);box-shadow:0 34px 60px -26px rgba(0,0,0,.9),0 8px 18px -10px rgba(0,0,0,.6)}
+.photo figcaption{margin-top:12px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:4px 12px;color:var(--muted)}
+.photo .place{font-family:var(--serif);font-style:italic;font-size:1.02rem;color:var(--ink)}
+.badge{position:absolute;z-index:2;right:2%;bottom:30%;width:clamp(104px,9vw,128px);aspect-ratio:1;border-radius:50%;background:var(--bg);border:1px solid var(--line);box-shadow:0 16px 32px -14px rgba(0,0,0,.85);display:grid;place-items:center}
+.badge svg.ring{position:absolute;inset:0;width:100%;height:100%}
+.badge text{font-family:var(--sans);font-size:8.4px;font-weight:600;letter-spacing:2.2px;fill:var(--ink)}
+.badge__core{font-family:var(--serif);font-style:italic;font-size:1.75rem;line-height:1;color:var(--acid);letter-spacing:-.02em}
+
+/* ---------- Bento: hairline grid ---------- */
+.bento{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-bottom:80px}
+.tile{min-width:0;position:relative;background:var(--surface);padding:clamp(20px,2.2vw,30px)}
+.about{grid-column:span 7;grid-row:span 3;display:flex;flex-direction:column;gap:20px}
+.about__head{display:flex;align-items:baseline;justify-content:space-between;gap:12px 16px;flex-wrap:wrap}
+.about h2{margin:0;font-family:var(--serif);font-style:italic;font-weight:400;font-size:clamp(2.2rem,3.4vw,3rem);line-height:1}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:.3rem .72rem;border-radius:999px;border:1px solid var(--line);color:var(--ink);font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+.about p{margin:0;max-width:62ch;color:var(--muted)}
+.about p strong{color:var(--ink);font-weight:600}
+.skills{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 28px;border-top:1px solid var(--line)}
+.skills li{display:flex;align-items:flex-start;gap:12px;padding:14px 0;border-bottom:1px solid var(--line);font-weight:500}
+.skills svg{flex:none;width:13px;height:13px;margin-top:6px;color:var(--acid)}
+.avail{margin-top:auto;font-size:.95rem}
+.avail .dot{display:inline-block;margin-right:10px;vertical-align:.08em}
+.avail .dot{width:7px;height:7px}
+.photo .place{white-space:nowrap}
+.avail a{color:var(--ink)}
+.avail a:hover{color:var(--acid)}
+
+.stat{grid-column:span 5;display:grid;grid-template-columns:auto minmax(0,1fr);align-items:end;gap:6px 22px;min-height:150px;transition:background .3s var(--ease)}
+.stat:hover{background:var(--surface-2)}
+.stat .pill{position:absolute;top:16px;right:16px}
+.stat__num{font-family:var(--display);font-size:clamp(3.2rem,5.2vw,4.6rem);line-height:.85;letter-spacing:.01em;font-variant-numeric:tabular-nums}
+.stat__num sup{font-size:.5em;vertical-align:.7em;color:var(--acid);margin-left:2px}
+.stat__label{margin:0;color:var(--muted);font-size:.95rem;line-height:1.45;max-width:24ch}
+
+/* ---------- Motion: one moment (disc blooms, photo develops) ---------- */
+@media (prefers-reduced-motion:no-preference){
+  .plate::before{animation:bloom 1.3s var(--ease) both}
+  .photo img{animation:develop 1.5s var(--ease) .12s both}
+  .badge svg.ring{animation:spin 26s linear infinite}
+  .star-xl{animation:spin 90s linear infinite}
+}
+@keyframes bloom{from{transform:scale(.8);opacity:0}to{transform:none;opacity:1}}
+@keyframes develop{from{clip-path:inset(0 0 100% 0)}to{clip-path:inset(0)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* ---------- Responsive ---------- */
+@media (max-width:1100px){
+  .nav{flex-wrap:wrap;row-gap:10px}
+  .nav > nav{order:3;width:100%;overflow-x:auto;scrollbar-width:none}
+  .nav__links a{white-space:nowrap}
+  .about{grid-column:1/-1;grid-row:auto}
+  .stat{grid-column:span 4;grid-template-columns:1fr;align-items:start;min-height:0;padding-top:58px}
+}
+@media (max-width:900px){
+  :root{--rail:0px}
+  .rail{position:static;width:auto;flex-direction:row;flex-wrap:wrap;justify-content:flex-start;align-items:center;gap:16px 28px;padding:0;border:0;background:none;grid-column:1/-1}
+  .rail__mark{display:none}
+  .rail__status{writing-mode:horizontal-tb;transform:none}
+  .rail__status::after{width:40px;height:1px}
+  .social{flex-direction:row}
+  .hero{grid-template-columns:minmax(0,1fr);padding-top:32px}
+  .plate{justify-self:start;width:min(84%,340px);margin-top:8px}
+  .star-xl{right:-60px;top:-20px;width:240px;opacity:.4}
+}
+@media (max-width:640px){
+  .stat{grid-column:1/-1;grid-template-columns:auto minmax(0,1fr);align-items:end;padding-top:clamp(20px,2.2vw,30px)}
+  .stat .pill{position:static;grid-column:1/-1;justify-self:start;margin-bottom:10px}
+  .skills{grid-template-columns:1fr}
+  .nav__cta{padding:.5rem .95rem}
+  .badge{width:96px;right:0}
+}
+@media (max-width:400px){
+  .stat{grid-template-columns:1fr}
+  .btn-acid{padding-left:1.25rem}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="page">
+  <div class="wrap">
+    <header class="nav">
+      <a class="brand" href="/" aria-label="Joel Leiva, home">
+        <svg width="18" height="18" viewBox="-102 -102 204 204" aria-hidden="true" style="color:var(--acid)"><polygon fill="currentColor" points="-13.9,-99.0 13.9,-99.0 13.0,-22.5 78.8,-61.6 92.7,-37.5 26.0,0.0 92.7,37.5 78.8,61.6 13.0,22.5 13.9,99.0 -13.9,99.0 -13.0,22.5 -78.8,61.6 -92.7,37.5 -26.0,0.0 -92.7,-37.5 -78.8,-61.6 -13.0,-22.5"/></svg>
+        Joel <em>Leiva</em>
+      </a>
+      <nav aria-label="Primary">
+        <ul class="nav__links">
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#certifications">Certifications</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#photography">Photography</a></li>
+        </ul>
+      </nav>
+      <a class="nav__cta" href="#contact">Contact</a>
+    </header>
+
+    <main id="main">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="copy">
+          <svg class="star-xl" viewBox="-102 -102 204 204" aria-hidden="true"><polygon points="-13.9,-99.0 13.9,-99.0 13.0,-22.5 78.8,-61.6 92.7,-37.5 26.0,0.0 92.7,37.5 78.8,61.6 13.0,22.5 13.9,99.0 -13.9,99.0 -13.0,22.5 -78.8,61.6 -92.7,37.5 -26.0,0.0 -92.7,-37.5 -78.8,-61.6 -13.0,-22.5"/></svg>
+          <p class="hello">
+            <svg viewBox="-102 -102 204 204" aria-hidden="true"><polygon fill="currentColor" points="-13.9,-99.0 13.9,-99.0 13.0,-22.5 78.8,-61.6 92.7,-37.5 26.0,0.0 92.7,37.5 78.8,61.6 13.0,22.5 13.9,99.0 -13.9,99.0 -13.0,22.5 -78.8,61.6 -92.7,37.5 -26.0,0.0 -92.7,-37.5 -78.8,-61.6 -13.0,-22.5"/></svg>
+            Hi, I&rsquo;m Joel Leiva
+          </p>
+          <h1 id="hero-title">
+            <span class="sr-only">Joel Leiva,</span>
+            <span class="h1__a">Security operations</span>
+            <span class="h1__b">analyst, SIEM <span class="amp">&amp;</span> threat intel.</span>
+          </h1>
+          <p class="lede">I triage SIEM alerts for <strong>25,000+ students, faculty and staff</strong> at Kean University.</p>
+          <div class="actions">
+            <a class="btn-acid" href="/documents/joel-leiva-resume.pdf" download>
+              Download resume
+              <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v12"/><path d="M6 11l6 6 6-6"/><path d="M5 20h14"/></svg></span>
+            </a>
+            <a class="btn-round" href="#projects">
+              <span class="disc"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15a1 1 0 0 0 1.5.86l12.5-7.5a1 1 0 0 0 0-1.72L8.5 3.64A1 1 0 0 0 7 4.5z"/></svg></span>
+              <span>See projects<small>Labs, research &amp; write-ups</small></span>
+            </a>
+          </div>
+        </div>
+
+        <div class="plate">
+          <figure class="photo">
+            <img src="../../../public/images/joel-photos/Home-Page-900.webp" width="900" height="1350" fetchpriority="high"
+                 alt="Portrait of Joel Leiva in a dark blazer and white polo against a plain light backdrop.">
+            <figcaption>
+              <span class="place">Union, New Jersey</span>
+              <span class="label">Kean University IT</span>
+            </figcaption>
+          </figure>
+          <div class="badge" aria-hidden="true">
+            <svg class="ring" viewBox="0 0 120 120">
+              <defs><path id="ring-path" d="M60,60 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0"/></defs>
+              <text><textPath href="#ring-path" textLength="274">JOEL LEIVA · SECURITY OPERATIONS ·</textPath></text>
+            </svg>
+            <span class="badge__core">JL</span>
+          </div>
+        </div>
+
+        <aside class="rail" aria-label="Status and profiles">
+          <svg class="rail__mark" viewBox="-102 -102 204 204" aria-hidden="true"><polygon fill="currentColor" points="-13.9,-99.0 13.9,-99.0 13.0,-22.5 78.8,-61.6 92.7,-37.5 26.0,0.0 92.7,37.5 78.8,61.6 13.0,22.5 13.9,99.0 -13.9,99.0 -13.0,22.5 -78.8,61.6 -92.7,37.5 -26.0,0.0 -92.7,-37.5 -78.8,-61.6 -13.0,-22.5"/></svg>
+          <p class="rail__status"><span class="dot" aria-hidden="true"></span>Open to work</p>
+          <ul class="social">
+            <li><a href="https://www.linkedin.com/in/joel-leiva0410" target="_blank" rel="noopener" aria-label="LinkedIn (opens in a new tab)"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a></li>
+            <li><a href="https://github.com/Joel-J-Leiva" target="_blank" rel="noopener" aria-label="GitHub (opens in a new tab)"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.82-.26.82-.57v-2.04c-3.34.73-4.04-1.6-4.04-1.6-.55-1.4-1.34-1.77-1.34-1.77-1.08-.74.09-.73.09-.73 1.2.09 1.83 1.24 1.83 1.24 1.07 1.83 2.8 1.3 3.49 1 .1-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22v3.29c0 .32.21.7.82.58A12 12 0 0 0 12 .3"/></svg></a></li>
+            <li><a href="/documents/joel-leiva-resume.pdf" aria-label="Resume (PDF)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h4"/></svg></a></li>
+          </ul>
+        </aside>
+      </section>
+
+      <section class="bento" id="about" aria-label="About and impact">
+        <article class="tile about">
+          <div class="about__head">
+            <h2>About</h2>
+            <span class="pill">BS Computer Science, Cybersecurity &middot; May 2027</span>
+          </div>
+          <p>Computer Science (Cybersecurity) student at Kean University working as a <strong>Junior Security Operations Analyst with Kean University IT</strong>: 24/7 threat monitoring in Stellar Cyber SIEM and CrowdStrike Falcon, identity investigation in Okta, and incident tracking in Freshservice. Previously a Threat Intelligence Analyst Intern at Kean&rsquo;s Center for Cybersecurity.</p>
+          <ul class="skills">
+            <li><svg viewBox="-102 -102 204 204" aria-hidden="true"><polygon fill="currentColor" points="-13.9,-99.0 13.9,-99.0 13.0,-22.5 78.8,-61.6 92.7,-37.5 26.0,0.0 92.7,37.5 78.8,61.6 13.0,22.5 13.9,99.0 -13.9,99.0 -13.0,22.5 -78.8,61.6 -92.7,37.5 -26.0,0.0 -92.7,-37.5 -78.8,-61.6 -13.0,-22.5"/></svg>SIEM monitoring &amp; alert triage</li>
+            <li><svg viewBox="-102 -102 204 204" aria-hidden="true"><polygon fill="currentColor" points="-13.9,-99.0 13.9,-99.0 13.0,-22.5 78.8,-61.6 92.7,-37.5 26.0,0.0 92.7,37.5 78.8,61.6 13.0,22.5 13.9,99.0 -13.9,99.0 -13.0,22.5 -78.8,61.6 -92.7,37.5 -26.0,0.0 -92.7,-37.5 -78.8,-61.6 -13.0,-22.5"/></svg>Threat intelligence &amp; MITRE ATT&amp;CK</li>
+            <li><svg viewBox="-102 -102 204 204" aria-hidden="true"><polygon fill="currentColor" points="-13.9,-99.0 13.9,-99.0 13.0,-22.5 78.8,-61.6 92.7,-37.5 26.0,0.0 92.7,37.5 78.8,61.6 13.0,22.5 13.9,99.0 -13.9,99.0 -13.0,22.5 -78.8,61.6 -92.7,37.5 -26.0,0.0 -92.7,-37.5 -78.8,-61.6 -13.0,-22.5"/></svg>Network segmentation &amp; OPNsense</li>
+            <li><svg viewBox="-102 -102 204 204" aria-hidden="true"><polygon fill="currentColor" points="-13.9,-99.0 13.9,-99.0 13.0,-22.5 78.8,-61.6 92.7,-37.5 26.0,0.0 92.7,37.5 78.8,61.6 13.0,22.5 13.9,99.0 -13.9,99.0 -13.0,22.5 -78.8,61.6 -92.7,37.5 -26.0,0.0 -92.7,-37.5 -78.8,-61.6 -13.0,-22.5"/></svg>Linux, Proxmox &amp; automation (Bash, Python)</li>
+          </ul>
+          <p class="avail"><span class="dot" aria-hidden="true"></span>Open to cybersecurity roles and technical collaboration. <a href="#contact">Get in touch</a></p>
+        </article>
+
+        <div class="tile stat">
+          <span class="pill">SIEM</span>
+          <span class="stat__num">25,000<sup>+</sup></span>
+          <p class="stat__label">users in the environment I monitor</p>
+        </div>
+        <div class="tile stat">
+          <span class="pill">Threat intel</span>
+          <span class="stat__num">60<sup>+</sup></span>
+          <p class="stat__label">nonprofits that received our threat intelligence reports</p>
+        </div>
+        <div class="tile stat">
+          <span class="pill">Wazuh lab</span>
+          <span class="stat__num">395</span>
+          <p class="stat__label">CIS checks assessed on my Wazuh lab host</p>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
+</body>
+</html>

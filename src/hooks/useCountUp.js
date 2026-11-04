@@ -6,12 +6,13 @@ const easeOut = (t) => 1 - Math.pow(1 - t, 3);
 /**
  * Counts from 0 to `target` once `start` is true.
  * Before start, and under reduced motion, it returns the final value, so the first
- * render always shows the real number. State is only set from animation frames.
+ * render always shows the real number. Once it starts, the first frame shows 0, not the final value.
+ * State is only set from animation frames.
  */
 export default function useCountUp(target, { start = false, duration = 900 } = {}) {
   const reduced = usePrefersReducedMotion();
   const animate = start && !reduced && typeof requestAnimationFrame !== 'undefined';
-  const [value, setValue] = useState(target);
+  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
     if (!animate) return undefined;
@@ -19,12 +20,12 @@ export default function useCountUp(target, { start = false, duration = 900 } = {
     const t0 = performance.now();
     const tick = (now) => {
       const t = Math.min(1, (now - t0) / duration);
-      setValue(Math.round(easeOut(t) * target));
+      setProgress(t);
       if (t < 1) frame = requestAnimationFrame(tick);
     };
     frame = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(frame);
-  }, [animate, target, duration]);
+  }, [animate, duration]);
 
-  return animate ? value : target;
+  return animate ? Math.round(easeOut(progress) * target) : target;
 }

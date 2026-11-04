@@ -1,9 +1,11 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { render, screen, waitFor, within } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 import { createMemoryRouter, RouterProvider } from 'react-router-dom';
 import { routes } from '../App';
 import { primaryNav } from '../data/nav';
 import { projects } from '../data/projects/index.js';
+import { profile } from '../data/profile';
+import { categoryTone } from '../components/ui/tones';
 import useCountUp from '../hooks/useCountUp';
 import sitemap from '../../public/sitemap.xml?raw';
 
@@ -18,7 +20,7 @@ describe('routes', () => {
   it('renders the home hero and resume link', async () => {
     renderAt('/');
     expect(
-      await screen.findByRole('heading', { level: 1, name: 'Joel Leiva, security operations analyst.' }, LOAD),
+      await screen.findByRole('heading', { level: 1, name: 'Joel Leiva, Security operations analyst, SIEM & threat intel.' }, LOAD),
     ).toBeInTheDocument();
     const resumeLinks = screen.getAllByRole('link', { name: /resume/i });
     expect(resumeLinks.some((a) => a.getAttribute('href') === '/documents/joel-leiva-resume.pdf')).toBe(true);
@@ -72,5 +74,94 @@ describe('sitemap.xml', () => {
     for (const { slug } of projects) {
       expect(sitemap).toContain(`/projects/${slug}</loc>`);
     }
+  });
+});
+
+const mockReducedMotion = (matches) =>
+  vi.fn().mockImplementation((query) => ({
+    matches: matches && query.includes('reduce'),
+    media: query,
+    onchange: null,
+    addEventListener: vi.fn(),
+    removeEventListener: vi.fn(),
+    addListener: vi.fn(),
+    removeListener: vi.fn(),
+    dispatchEvent: vi.fn(),
+  }));
+
+describe('shell: rail and motion pause', () => {
+  const originalMatchMedia = window.matchMedia;
+  afterEach(() => {
+    window.matchMedia = originalMatchMedia;
+  });
+
+  const rail = () => screen.findByRole('complementary', { name: 'Status and profiles' }, LOAD);
+  const pauseIn = async () => within(await rail()).getByRole('button', { name: 'Pause motion' });
+
+  it('lists LinkedIn, GitHub and Resume in the rail', async () => {
+    renderAt('/');
+    const r = within(await rail());
+    expect(r.getByRole('link', { name: /^LinkedIn/ })).toHaveAttribute('href', profile.links.linkedin);
+    expect(r.getByRole('link', { name: /^GitHub/ })).toHaveAttribute('href', profile.links.github);
+    expect(r.getByRole('link', { name: /^Resume/ })).toHaveAttribute('href', profile.links.resume);
+  });
+
+  it('maps every project category to a tone', () => {
+    expect(categoryTone).toEqual({ secops: 'lime', infrastructure: 'sage', homelab: 'dusk', intel: 'stone' });
+    for (const category of new Set(projects.map((p) => p.category))) {
+      expect(Object.keys(categoryTone)).toContain(category);
+    }
+  });
+
+  it('pauses and resumes motion, persisting the choice', async () => {
+    renderAt('/');
+    const button = await pauseIn();
+    expect(button).toHaveAttribute('aria-pressed', 'false');
+    fireEvent.click(button);
+    expect(button).toHaveAttribute('aria-pressed', 'true');
+    expect(document.documentElement.dataset.motion).toBe('paused');
+    expect(localStorage.getItem('motion-paused')).toBe('1');
+    fireEvent.click(button);
+    expect(button).toHaveAttribute('aria-pressed', 'false');
+    expect(document.documentElement.dataset.motion).toBeUndefined();
+    expect(localStorage.getItem('motion-paused')).toBeNull();
+  });
+
+  it('restores a stored pause', async () => {
+    localStorage.setItem('motion-paused', '1');
+    renderAt('/');
+    expect(await pauseIn()).toHaveAttribute('aria-pressed', 'true');
+  });
+
+  it('still toggles when storage throws', async () => {
+    vi.spyOn(Storage.prototype, 'getItem').mockImplementation(() => {
+      throw new Error('blocked');
+    });
+    vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => {
+      throw new Error('blocked');
+    });
+    renderAt('/');
+    const button = await pauseIn();
+    fireEvent.click(button);
+    expect(button).toHaveAttribute('aria-pressed', 'true');
+  });
+
+  it('hides the pause control under reduced motion', async () => {
+    window.matchMedia = mockReducedMotion(true);
+    renderAt('/');
+    await rail();
+    expect(screen.queryByRole('button', { name: 'Pause motion' })).toBeNull();
+  });
+});
+
+describe('route change', () => {
+  it('moves focus to main and announces the new page heading', async () => {
+    const router = createMemoryRouter(routes, { initialEntries: ['/'] });
+    render(<RouterProvider router={router} />);
+    await screen.findByRole('heading', { level: 1, name: /Security operations/ }, LOAD);
+    router.navigate('/contact');
+    await waitFor(() => expect(document.activeElement).toHaveAttribute('id', 'main'), LOAD);
+    const live = document.querySelector('[aria-live="polite"]');
+    await waitFor(() => expect(live).toHaveTextContent('Get in touch'), LOAD);
   });
 });

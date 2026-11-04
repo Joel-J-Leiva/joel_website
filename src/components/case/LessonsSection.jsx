@@ -12,7 +12,7 @@ export default function LessonsSection({ heading, items = [] }) {
               {String(i + 1).padStart(2, '0')}
             </span>
             <div className="min-w-0">
-              <h3 className="text-lg font-medium">{item.title}</h3>
+              <h3 className="text-lg">{item.title}</h3>
               <p className="mt-2 max-w-[52ch] text-muted">
                 <RichText text={item.text} />
               </p>

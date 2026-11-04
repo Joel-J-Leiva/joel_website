@@ -6,7 +6,7 @@ export default function RichText({ text }) {
   const parts = String(text).split('`');
   return parts.map((part, i) =>
     i % 2 === 1 ? (
-      <code key={i} className="measured text-ink">
+      <code key={i} className="measured text-ink-2">
         {part}
       </code>
     ) : (

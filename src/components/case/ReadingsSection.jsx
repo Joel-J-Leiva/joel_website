@@ -39,7 +39,7 @@ export default function ReadingsSection({ heading, text, items = [], paragraphs 
                 />
               ))}
             </div>
-            <p className="measured mt-4 text-cool">
+            <p className="measured mt-4 text-ink-2">
               {Math.round((parts[0].value / total) * 100)}% {parts[0].label.toLowerCase()}
             </p>
           </>

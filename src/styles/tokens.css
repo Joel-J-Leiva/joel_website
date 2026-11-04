@@ -6,21 +6,29 @@
   --text-section: clamp(2rem, 2.5vw + 1rem, 3.5rem); --text-title: clamp(1.25rem, 0.75vw + 0.875rem, 1.625rem); --text-lead: clamp(1.125rem, 0.35vw + 1rem, 1.375rem);
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1); --ease-in: cubic-bezier(0.7, 0, 0.84, 0); --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
   --dur-micro: 120ms; --dur-short: 220ms; --dur-long: 420ms;
-  --color-error: oklch(72% 0.15 27); --color-success: oklch(76% 0.13 150);
-  --container: 1440px; --gutter: 64px; --gap-columns: 32px; --section-gap-s: 120px; --section-gap: 144px; --section-gap-l: 176px;
+  --container: 1320px; --gutter: clamp(16px, 4vw, 56px); --gap-columns: 32px; --section-gap-s: 120px; --section-gap: 144px; --section-gap-l: 176px;
+  --rail: 0px;
   --z-base: 1; --z-raised: 10; --z-dropdown: 100; --z-sticky: 200; --z-sticky-nav: 300; --z-modal: 400; --z-toast: 500; --z-tooltip: 600;
-  /* Navy-tinted graphite ground; cyan (primary), green and violet as the three signals; sky for secondary reads. No yellow. */
-  --color-paper: oklch(16% 0.024 258); --color-paper-2: oklch(20.5% 0.028 258); --color-paper-3: oklch(12.5% 0.02 258);
-  --color-ink: oklch(95.5% 0.008 250); --color-ink-2: oklch(85% 0.016 250); --color-muted: oklch(73% 0.022 252);
-  --color-rule: oklch(30% 0.032 258); --color-rule-2: oklch(42% 0.04 258);
-  --color-accent: oklch(79% 0.135 215); --color-accent-ink: oklch(19% 0.045 230); --color-accent-soft: oklch(30% 0.06 220); --color-focus: oklch(79% 0.135 215);
-  --color-cool: oklch(79% 0.15 158); --color-cool-soft: oklch(28% 0.055 160);
-  --color-violet: oklch(74% 0.15 298); --color-violet-soft: oklch(29% 0.07 298);
-  --color-sky: oklch(78% 0.11 250); --color-sky-soft: oklch(29% 0.06 252);
-  --color-ok: oklch(77% 0.15 152); --color-ok-soft: oklch(25% 0.04 152); --color-bad: oklch(70% 0.17 22); --color-bad-soft: oklch(25% 0.045 22);
-  --font-display: "Host Grotesk", ui-sans-serif, system-ui, sans-serif; --font-body: var(--font-display);
+  /* Acid Split: near-black ground, off-white ink, one acid-lime accent. See docs/designs/acid-split-redesign.md. */
+  --color-paper: oklch(15.9% 0 0); --color-paper-2: oklch(19.1% 0 0); --color-paper-3: oklch(14.5% 0 0);
+  --color-ink: oklch(95.5% 0.008 91.5); --color-ink-2: oklch(86.7% 0.013 91.5); --color-muted: oklch(72.5% 0.015 93);
+  --color-rule: oklch(28.5% 0 0); --color-rule-2: oklch(34.8% 0 0);
+  --color-accent: oklch(90.3% 0.208 122.9); --color-accent-ink: oklch(15.9% 0 0); --color-focus: oklch(90.3% 0.208 122.9);
+  --color-accent-soft: color-mix(in oklab, var(--color-accent) 14%, var(--color-paper));
+  /* Category tints: chroma 0.06 or less, so lime stays the only saturated colour. Used only through src/components/ui/tones.js. */
+  --color-sage: oklch(75% 0.056 145); --color-sage-soft: color-mix(in oklab, var(--color-sage) 14%, var(--color-paper));
+  --color-stone: oklch(76% 0.04 70); --color-stone-soft: color-mix(in oklab, var(--color-stone) 14%, var(--color-paper));
+  --color-dusk: oklch(71.8% 0.059 300); --color-dusk-soft: color-mix(in oklab, var(--color-dusk) 14%, var(--color-paper));
+  /* Status pair: pass/fail data and form errors only. */
+  --color-ok: oklch(76% 0.09 175); --color-ok-soft: color-mix(in oklab, var(--color-ok) 14%, var(--color-paper));
+  --color-bad: oklch(70% 0.16 25); --color-bad-soft: color-mix(in oklab, var(--color-bad) 14%, var(--color-paper));
+  --font-display: "Anton", "Anton Fallback", "Anton Fallback Arial", "Arial Narrow", sans-serif;
+  --font-serif: "Instrument Serif", "Instrument Serif Fallback", Georgia, serif;
+  --font-body: "Archivo", ui-sans-serif, system-ui, sans-serif;
   --font-outlier: "Atkinson Hyperlegible Mono", ui-monospace, monospace;
-  --radius-card: 10px; --radius-pill: 6px; --rule-hair: 1px;
-  --shadow-card: none;
-  --tracking-display: -0.03em; --display-weight: 500;
+  --radius-card: 14px; --radius-pill: 6px; --radius-round: 999px; --rule-hair: 1px;
+  /* The only shadows: the Home portrait wrapper and the badge. */
+  --shadow-plate: 0 34px 60px -26px oklch(0% 0 0 / 0.9), 0 8px 18px -10px oklch(0% 0 0 / 0.6);
+  --shadow-badge: 0 16px 32px -14px oklch(0% 0 0 / 0.85);
+  --tracking-display: 0.005em; --display-weight: 400;
 }

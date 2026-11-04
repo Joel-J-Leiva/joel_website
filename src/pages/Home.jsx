@@ -1,72 +1,172 @@
-import { FileText } from 'lucide-react';
+import { Download, FileText, Play } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import Seo from '../components/Seo';
+import Asterisk from '../components/ui/Asterisk';
 import Button from '../components/ui/Button';
 import SectionHead from '../components/ui/SectionHead';
 import Reading from '../components/ui/Reading';
-import SignalBar from '../components/ui/SignalBar';
 import { tones } from '../components/ui/tones';
 import ProjectRow from '../components/ProjectRow';
+import ProfileLinks from '../components/ProfileLinks';
 import CopyEmail from '../components/CopyEmail';
-import { LinkedinIcon, GithubIcon } from '../components/icons';
 import { profile } from '../data/profile';
 import { experience, formatMonth } from '../data/experience';
 import { featuredProjects, homeCase as sca, projects } from '../data/projects';
 import { toolkit } from '../data/skills';
+import { earned, headlineCerts } from '../data/certifications';
 
-
-function Hero() {
-  const typed = `${profile.whoami.command}`;
+/** before / <strong> / after, for heroLede and aboutShort. */
+function Emphasis({ text }) {
   return (
-    <section aria-labelledby="hero-title" className="container grid items-center gap-8 py-10 lg:min-h-[calc(100svh-4rem)] lg:grid-cols-[minmax(0,640px)_420px] lg:justify-center lg:gap-24 lg:py-12">
-      <div className="min-w-0">
-        <SignalBar className="mb-8" />
-        <h1 id="hero-title" className="lg:max-w-[12ch]">{profile.headline}</h1>
-        <p className="lead mt-6 text-ink-2">{profile.heroSentence}</p>
-        <div className="mt-10 flex flex-wrap gap-3">
-          <Button href={profile.links.resume} external variant="primary">
-            <FileText size={16} aria-hidden="true" />
-            Read my resume
-          </Button>
-          <Button to="/contact">Get in touch</Button>
-        </div>
-      </div>
-
-      <figure className="panel mx-auto w-full max-w-[420px] overflow-hidden lg:mx-0">
-        <div data-slot="portrait" className="aspect-[16/9] w-full sm:aspect-[4/3] lg:aspect-[4/5]">
-          <img src={profile.portraitHome.src} srcSet={profile.portraitHome.srcSet} sizes="(min-width: 1024px) 420px, (min-width: 640px) 560px, 100vw" alt={profile.portraitHome.alt} width="1200" height="1800" fetchPriority="high" decoding="async" />
-        </div>
-        <figcaption className="border-t border-rule bg-paper-3 px-5 py-4">
-          <p className="measured text-ink-2">
-            <span className="text-accent">$ </span>
-            <span className="typed" style={{ '--typed-steps': typed.length }}>{typed}</span>
-          </p>
-          <p className="measured mt-1 text-cool">
-            {profile.whoami.output}
-            <span className="caret ml-1" aria-hidden="true" />
-          </p>
-          <dl className="mt-4 hidden grid-cols-[auto_minmax(0,1fr)] gap-x-6 gap-y-1 border-t border-rule pt-4 text-sm sm:grid">
-            {profile.record.map((row) => (
-              <div key={row.label} className="contents">
-                <dt className="text-muted">{row.label}</dt>
-                <dd className="measured text-ink-2">{row.value}</dd>
-              </div>
-            ))}
-          </dl>
-        </figcaption>
-      </figure>
-    </section>
+    <>
+      {text.before}
+      <strong>{text.strong}</strong>
+      {text.after}
+    </>
   );
 }
 
-function Readings() {
+/** The serif line, with its "&" set in lime. Spaces stay as text so the accessible name reads naturally. */
+function SerifLine({ text }) {
+  const [before, ...rest] = text.split(' & ');
+  if (!rest.length) return text;
   return (
-    <section aria-label="By the numbers" className="container mt-[var(--section-gap-s)]">
-      <div className="panels sm:grid-cols-3">
+    <>
+      {before}{' '}
+      <span className="amp">&amp;</span>{' '}
+      {rest.join(' & ')}
+    </>
+  );
+}
+
+function Hero() {
+  return (
+    <div className="container">
+      <section className="hero" aria-labelledby="hero-title">
+        <div className="copy">
+          <Asterisk variant="outline" className="star-xl" />
+          <p className="hello">
+            <Asterisk />
+            Hi, I’m {profile.shortName}
+          </p>
+          <h1 id="hero-title" className="max-w-none">
+            <span className="visually-hidden">Joel Leiva,</span>{' '}
+            <span className="h1__a">{profile.hero.display}</span>{' '}
+            <span className="h1__b">
+              <SerifLine text={profile.hero.serif} />
+            </span>
+          </h1>
+          <p className="lede">
+            <Emphasis text={profile.heroLede} />
+          </p>
+          <div className="actions">
+            <Button variant="primary" href={profile.links.resume} download icon={<Download size={16} />}>
+              Download resume
+            </Button>
+            <Link to="/projects" viewTransition className="btn-round">
+              <span className="disc">
+                <Play aria-hidden="true" fill="currentColor" strokeWidth={0} />
+              </span>
+              <span>
+                See projects<small>{profile.hero.projectsNote}</small>
+              </span>
+            </Link>
+          </div>
+        </div>
+
+        <div className="status-row">
+          <span className="inline-flex items-center gap-3">
+            <span className="status-dot" aria-hidden="true" />
+            <span className="label">{profile.status}</span>
+          </span>
+          <ProfileLinks variant="icon" />
+        </div>
+
+        <div className="plate">
+          <figure className="photo">
+            <div data-slot="portrait">
+              <img
+                src={profile.portraitHome.src}
+                srcSet={profile.portraitHome.srcSet}
+                sizes="(min-width: 900px) 340px, 84vw"
+                alt={profile.portraitHome.alt}
+                width="900"
+                height="1350"
+                fetchPriority="high"
+              />
+            </div>
+            <figcaption>
+              <span className="place">{profile.location}</span>
+              <span className="label">{profile.org}</span>
+            </figcaption>
+          </figure>
+          <div className="badge" aria-hidden="true">
+            <svg className="badge__ring" viewBox="0 0 120 120" focusable="false">
+              <defs>
+                <path id="ring-path" d="M60,60 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0" />
+              </defs>
+              <text>
+                <textPath href="#ring-path" textLength="274">
+                  {profile.hero.badge}
+                </textPath>
+              </text>
+            </svg>
+            <span className="badge__core">{profile.hero.monogram}</span>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
+
+function Bento() {
+  return (
+    <div className="container">
+      <section className="bento" aria-label="About and impact">
+        <article className="tile about">
+          <div className="about__head">
+            <h2>About</h2>
+            <span className="pill">
+              {profile.education.short} · {profile.education.expected}
+            </span>
+          </div>
+          <p>
+            <Emphasis text={profile.aboutShort} />
+          </p>
+          <ul className="skills">
+            {profile.focus.map((item) => (
+              <li key={item}>
+                <Asterisk />
+                {item}
+              </li>
+            ))}
+          </ul>
+          <div className="certs">
+            <h3 className="certs__title">Certified</h3>
+            <ul className="certs__list" role="list">
+              {headlineCerts.map((c) => (
+                <li key={c} className="pill">
+                  {c}
+                </li>
+              ))}
+            </ul>
+            <Link to="/achievements" viewTransition className="link text-sm">
+              All {earned.length} certifications
+            </Link>
+          </div>
+          <p className="avail">
+            <span className="status-dot" aria-hidden="true" />
+            {profile.availability}{' '}
+            <Link to="/contact" viewTransition>
+              Get in touch
+            </Link>
+          </p>
+        </article>
         {profile.readings.map((r) => (
           <Reading key={r.label} {...r} />
         ))}
-      </div>
-    </section>
+      </section>
+    </div>
   );
 }
 
@@ -75,8 +175,8 @@ function FeaturedProjects() {
     <section aria-labelledby="work-title" className="container mt-[var(--section-gap)]">
       <SectionHead id="work-title" title="Featured projects" lead="Labs, field tools and research, each written up as a case." link={{ to: '/projects', label: `All ${projects.length} projects` }} />
       <ol className="panels" role="list">
-        {featuredProjects.map((p, i) => (
-          <ProjectRow key={p.slug} project={p} index={i} thumb={false} />
+        {featuredProjects.map((p) => (
+          <ProjectRow key={p.slug} project={p} thumb={false} />
         ))}
       </ol>
     </section>
@@ -100,7 +200,7 @@ function Trail() {
         {experience.map((job) => (
           <li key={job.id} className="relative pl-10">
             <span className={`trail-mark top-2 ${tones[job.tone].bar} ${tones[job.tone].border}`} aria-hidden="true" />
-            <p className="measured text-cool">
+            <p className="measured text-ink-2">
               {formatMonth(job.start)} to {formatMonth(job.end)}
             </p>
             <h3 className={`mt-2 ${tones[job.tone].text}`}>{job.shortRole}</h3>
@@ -148,7 +248,7 @@ function CaseSca() {
             <span className="bg-bad" style={{ width: `${failPct}%` }} />
             <span className="bg-ok" style={{ width: `${100 - failPct}%`, animationDelay: '120ms' }} />
           </div>
-          <p className="measured mt-4 text-cool">{Math.round(failPct)}% failing on first scan</p>
+          <p className="measured mt-4 text-ink-2">{Math.round(failPct)}% failing on first scan</p>
         </div>
       </div>
     </section>
@@ -167,12 +267,7 @@ function Close() {
             <FileText size={16} aria-hidden="true" />
             Read my resume<span className="visually-hidden"> (opens in a new tab)</span>
           </Button>
-          <Button href={profile.links.linkedin} external>
-            <LinkedinIcon /> LinkedIn<span className="visually-hidden"> (opens in a new tab)</span>
-          </Button>
-          <Button href={profile.links.github} external>
-            <GithubIcon /> GitHub<span className="visually-hidden"> (opens in a new tab)</span>
-          </Button>
+          <ProfileLinks variant="text" omit={['resume']} />
         </div>
       </div>
     </section>
@@ -184,7 +279,7 @@ export default function Home() {
     <>
       <Seo />
       <Hero />
-      <Readings />
+      <Bento />
       <FeaturedProjects />
       <Trail />
       <CaseSca />

@@ -5,7 +5,7 @@ export default function NoteSection({ heading, text }) {
   const id = useId();
   return (
     <aside className="container mt-[var(--section-gap-s)]" aria-labelledby={id}>
-      <div className="max-w-[52ch] border-l-2 border-accent pl-6">
+      <div className="max-w-[52ch] border-t border-rule pt-6">
         <h2 id={id} className="text-title">
           {heading}
         </h2>
