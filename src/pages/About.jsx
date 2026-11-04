@@ -3,7 +3,7 @@ import Seo from '../components/Seo';
 import SectionHead from '../components/ui/SectionHead';
 import { profile } from '../data/profile';
 import { skillDomains, toolkit } from '../data/skills';
-import SignalBar from '../components/ui/SignalBar';
+import PageHeader from '../components/ui/PageHeader';
 import { toneAt } from '../components/ui/tones';
 
 const documents = [
@@ -57,7 +57,7 @@ function EducationPhilosophy() {
           </p>
           <p className="mt-4 text-muted">{ed.summary}</p>
           <p className="mt-6 text-sm text-muted">
-            Expected graduation <span className="measured text-cool">{ed.expected}</span>
+            Expected graduation <span className="measured text-ink-2">{ed.expected}</span>
           </p>
         </div>
         <div className="flex flex-col p-6 sm:p-8">
@@ -81,7 +81,7 @@ function Documents() {
               <FileText size={20} aria-hidden="true" className="mt-1 shrink-0 text-muted" />
               <span className="min-w-0">
                 <span className="block text-lg text-ink">{d.label}</span>
-                <span className="measured mt-1 block break-all text-cool">{d.file}</span>
+                <span className="measured mt-1 block break-all text-ink-2">{d.file}</span>
                 <span className="mt-2 block text-muted">{d.text}</span>
               </span>
               <span className="visually-hidden"> (opens in a new tab)</span>
@@ -99,8 +99,7 @@ function Skills() {
       <SectionHead id="skills-title" title="Skills" lead="Grouped by discipline, from work and lab builds." />
       <div className="panels md:grid-cols-2 lg:grid-cols-3">
         {skillDomains.map((d, i) => (
-          <div key={d.domain} className="relative p-6 sm:p-8">
-            <span aria-hidden="true" className={`absolute inset-x-0 top-0 h-1 ${toneAt(i).bar}`} />
+          <div key={d.domain} className="p-6 sm:p-8">
             <h3 className={`text-lg ${toneAt(i).text}`}>{d.domain}</h3>
             <ul className="mt-4 space-y-2 text-sm text-ink-2" role="list">
               {d.items.map((item) => (
@@ -134,13 +133,7 @@ export default function About() {
         title="About"
         description="Joel Leiva: Computer Science (Cybersecurity) student at Kean University and Junior Security Operations Analyst with Kean University IT."
       />
-      <section className="container pt-16 pb-[var(--section-gap-s)] sm:pt-24 lg:pt-[var(--section-gap-s)]">
-        <SignalBar className="mb-8" />
-        <h1>About Joel Leiva</h1>
-        <p className="lead mt-6 max-w-[56ch] text-ink-2">
-          Security operations analyst, threat intelligence researcher and computer science student.
-        </p>
-      </section>
+      <PageHeader title="About Joel Leiva" lead="Security operations analyst, threat intelligence researcher and computer science student." />
       <Bio />
       <EducationPhilosophy />
       <Documents />

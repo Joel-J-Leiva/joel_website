@@ -2,7 +2,7 @@ import { FileText } from 'lucide-react';
 import Seo from '../components/Seo';
 import Button from '../components/ui/Button';
 import Chip from '../components/ui/Chip';
-import SignalBar from '../components/ui/SignalBar';
+import PageHeader from '../components/ui/PageHeader';
 import { tones } from '../components/ui/tones';
 import { profile } from '../data/profile';
 import { experience, knowledgePlatform, formatMonth } from '../data/experience';
@@ -15,7 +15,7 @@ function Role({ job }) {
       <span className={`trail-mark top-2 ${t.bar} ${t.border}`} aria-hidden="true" />
       <div className="grid gap-8 lg:grid-cols-[minmax(0,4fr)_minmax(0,8fr)] lg:gap-16">
         <div className="min-w-0">
-          <p className={`measured ${t.text}`}>
+          <p className="measured text-ink-2">
             {formatMonth(job.start)} to {formatMonth(job.end)}
           </p>
           <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-2">
@@ -56,13 +56,10 @@ export default function Experience() {
         description="Security operations at Kean University IT, operations at House of Hearts, and threat intelligence research for 60+ nonprofits."
       />
 
-      <section className="container pt-16 pb-[var(--section-gap-s)] sm:pt-24 lg:pt-[var(--section-gap-s)]">
-        <SignalBar className="mb-8" />
-        <h1>Experience</h1>
-        <p className="lead mt-6 max-w-[56ch] text-ink-2">
-          Security operations for 25,000+ users, threat intelligence research, and operations infrastructure.
-        </p>
-      </section>
+      <PageHeader
+        title="Experience"
+        lead="Security operations for 25,000+ users, threat intelligence research, and operations infrastructure."
+      />
 
       <section aria-labelledby="roles-title" className="container">
         <h2 id="roles-title" className="visually-hidden">Roles</h2>

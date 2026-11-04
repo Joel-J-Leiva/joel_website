@@ -44,11 +44,11 @@ export default {
       heading: 'The hardware',
       images: [
         {
-          src: '/projects/dfir-triage-station/DFIR-Triage-Station.jpg',
+          src: '/projects/dfir-triage-station/DFIR-Triage-Station.webp',
           alt: 'DFIR triage station hardware',
           caption: 'The field workstation hardware.',
-          width: 3072,
-          height: 4080,
+          width: 1200,
+          height: 1594,
         },
       ],
     },

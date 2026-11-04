@@ -44,11 +44,11 @@ export default {
       heading: 'The hardware',
       images: [
         {
-          src: '/projects/home-lab-networking/Homelab.jpg',
+          src: '/projects/home-lab-networking/Homelab.webp',
           alt: 'Home lab network hardware',
           caption: 'Lab hardware infrastructure.',
-          width: 3072,
-          height: 4080,
+          width: 1200,
+          height: 1594,
         },
       ],
     },

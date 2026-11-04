@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 import Seo from '../components/Seo';
-import SignalBar from '../components/ui/SignalBar';
+import PageHeader from '../components/ui/PageHeader';
 import { photos } from '../data/photos';
 
 const total = photos.length;
@@ -56,7 +56,7 @@ function Lightbox({ index, onNavigate, onClose }) {
           <p className="measured text-ink-2" aria-live="polite">
             Photograph {index + 1} of {total}
           </p>
-          <button type="button" className="btn min-h-0 px-3 py-1.5 text-sm" onClick={close}>
+          <button type="button" className="btn btn--primary" onClick={close}>
             <X size={16} aria-hidden="true" />
             Close
           </button>
@@ -106,13 +106,7 @@ export default function Photography() {
   return (
     <>
       <Seo title="Photography" description="Street, architectural and landscape photography by Joel Leiva." />
-      <section className="container pt-16 pb-[var(--section-gap-s)] sm:pt-24 lg:pt-[var(--section-gap-s)]">
-        <SignalBar className="mb-8" />
-        <h1>Photography</h1>
-        <p className="lead mt-6 max-w-[56ch] text-ink-2">
-          Street, architectural and landscape photography. It trains the attention to detail and patience I bring to security work.
-        </p>
-      </section>
+      <PageHeader title="Photography" lead="Street, architectural and landscape photography. It trains the attention to detail and patience I bring to security work." />
 
       <section aria-label="Photo archive" className="container">
         <p className="text-sm text-muted">

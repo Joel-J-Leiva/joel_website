@@ -1,6 +1,6 @@
 import CaseSection from './CaseSection';
 
-/** Project photos in duotone slots sized to each image’s own aspect ratio, so nothing is cropped. */
+/** Project photos in full colour, in slots sized to each image’s own aspect ratio, so nothing is cropped. */
 export default function GallerySection({ heading, images = [] }) {
   const single = images.length === 1;
   return (

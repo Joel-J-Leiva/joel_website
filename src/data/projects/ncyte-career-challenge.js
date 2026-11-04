@@ -56,11 +56,11 @@ export default {
       heading: 'Network topology',
       images: [
         {
-          src: '/projects/ncyte/network-diagram.png',
+          src: '/projects/ncyte/network-diagram.webp',
           alt: 'NCyTE virtual infrastructure network diagram',
           caption: 'Virtual network topology: perimeter, LAN, WAN and DMZ zones on the Proxmox host.',
-          width: 1920,
-          height: 1080,
+          width: 1200,
+          height: 675,
         },
       ],
     },

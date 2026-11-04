@@ -3,7 +3,7 @@ export const profile = {
   shortName: 'Joel Leiva',
   role: 'Junior Security Operations Analyst',
   org: 'Kean University IT',
-  location: 'Union, New Jersey',
+  location: 'Elizabeth, New Jersey',
   school: 'Kean University',
   email: 'leivajo@kean.edu',
   links: {
@@ -20,25 +20,31 @@ export const profile = {
     alt: 'Joel Leiva, portrait',
   },
   portraitAbout: { src: '/images/joel-photos/About-Me.webp', alt: 'Joel Leiva' },
-  // Hero: a headline of seven words or fewer and one sentence.
-  headline: 'Joel Leiva, security operations analyst.',
-  heroSentence: 'I triage SIEM alerts for 25,000+ students, faculty and staff at Kean University.',
-  // The one terminal touch: typed once under the portrait.
-  whoami: { command: 'whoami', output: 'joel.leiva, secops analyst' },
-  // The hero's record under the whoami line: facts from the experience data, set in the measured face.
-  record: [
-    { label: 'Role', value: 'junior secops analyst' },
-    { label: 'Org', value: 'kean university it' },
-    { label: 'Since', value: '2026-06' },
-    { label: 'Scope', value: '25,000+ users' },
-    { label: 'Graduates', value: '2027-05, bs cs' },
-  ],
   availability: 'Open to cybersecurity roles and technical collaboration.',
+  status: 'Open to work',
+  // Home hero (Acid Split). Every phrase restates role, the original hero sentence or the skill domains; no new facts.
+  hero: {
+    display: 'Security operations',
+    serif: 'analyst, SIEM & threat intel.',
+    projectsNote: 'Labs, research & write-ups',
+    // Fixed string: the badge ring's textLength is tuned to it.
+    badge: 'JOEL LEIVA · SECURITY OPERATIONS ·',
+    monogram: 'JL',
+  },
+  heroLede: { before: 'I triage SIEM alerts for ', strong: '25,000+ students, faculty and staff', after: ' at Kean University.' },
+  // Restates bio[0] (role, tools) and bio[2] (internship).
+  aboutShort: {
+    before: 'Computer Science (Cybersecurity) student at Kean University working as a ',
+    strong: 'Junior Security Operations Analyst with Kean University IT',
+    after: ': 24/7 threat monitoring in Stellar Cyber SIEM and CrowdStrike Falcon, identity investigation in Okta, and incident tracking in Freshservice. Previously a Threat Intelligence Analyst Intern at Kean’s Center for Cybersecurity.',
+  },
+  // From skillDomains 1-5 in skills.js.
+  focus: ['SIEM monitoring & alert triage', 'Threat intelligence & MITRE ATT&CK', 'Network segmentation & OPNsense', 'Linux, Proxmox & automation (Bash, Python)'],
   // Figures stated on the original site; never add one that is not sourced here.
   readings: [
-    { value: 25000, suffix: '+', label: 'Students, faculty and staff in the environment I monitor', source: 'Kean University IT', tone: 'blue' },
-    { value: 60, suffix: '+', label: 'Nonprofits that received our threat intelligence reports', source: 'Kean Center for Cybersecurity', tone: 'green' },
-    { value: 395, label: 'CIS checks assessed on my Wazuh lab host', source: 'Wazuh SIEM lab', to: '/projects/wazuh-siem-lab', tone: 'violet' },
+    { value: 25000, suffix: '+', label: 'Students, faculty and staff in the environment I monitor', source: 'Kean University IT', tag: 'SIEM' },
+    { value: 60, suffix: '+', label: 'Nonprofits that received our threat intelligence reports', source: 'Kean Center for Cybersecurity', tag: 'Threat intel' },
+    { value: 395, label: 'CIS checks assessed on my Wazuh lab host', source: 'Wazuh SIEM lab', to: '/projects/wazuh-siem-lab', tag: 'Wazuh lab' },
   ],
   bio: [
     'I study Computer Science (Cybersecurity) at Kean University and work as a Junior Security Operations Analyst with Kean University IT. I run 24/7 threat monitoring in Stellar Cyber SIEM and CrowdStrike Falcon, investigate identity and sign-in activity in Okta, track incidents in Freshservice, and work with the Network and Cloud Engineering teams to protect an environment of more than 25,000 students, faculty and staff.',
@@ -54,6 +60,7 @@ export const profile = {
     school: 'Kean University',
     location: 'Union, NJ',
     expected: 'May 2027',
+    short: 'BS Computer Science, Cybersecurity',
     summary: 'Coursework in network security, operating system security, algorithms, data structures and defensive computing.',
   },
 };

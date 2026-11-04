@@ -1,5 +1,8 @@
 // Credentials from the original Achievements page. Earned/in-progress: {title, issuer, status, description}.
 // Academic: {title, institution, date, type, description}.
+// Short names for the Home About tile; each restates an earned title below.
+export const headlineCerts = ['CompTIA Security+', 'Fortinet FCA', 'Zscaler ZTCA'];
+
 export const earned = [
   {
     title: 'CompTIA Security+ (SY0-701)',

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { AlertCircle, Check, MapPin, Send } from 'lucide-react';
 import Seo from '../components/Seo';
-import SignalBar from '../components/ui/SignalBar';
+import PageHeader from '../components/ui/PageHeader';
 import Button from '../components/ui/Button';
 import CopyEmail from '../components/CopyEmail';
 import { LinkedinIcon, GithubIcon } from '../components/icons';
@@ -93,13 +93,7 @@ export default function Contact() {
   return (
     <>
       <Seo title="Contact" description="Contact Joel Leiva about security operations roles, incident response, threat research or technical collaboration." />
-      <section className="container pt-16 pb-[var(--section-gap-s)] sm:pt-24 lg:pt-[var(--section-gap-s)]">
-        <SignalBar className="mb-8" />
-        <h1>Get in touch</h1>
-        <p className="lead mt-6 max-w-[56ch] text-ink-2">
-          Open to security operations roles, incident response, threat research and technical collaboration.
-        </p>
-      </section>
+      <PageHeader title="Get in touch" lead="Open to security operations roles, incident response, threat research and technical collaboration." />
 
       <section aria-labelledby="form-title" className="container grid items-start gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
         <div className="min-w-0">

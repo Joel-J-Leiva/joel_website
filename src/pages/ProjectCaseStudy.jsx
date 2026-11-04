@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import Seo from '../components/Seo';
 import Chip from '../components/ui/Chip';
+import Asterisk from '../components/ui/Asterisk';
 import { statusTone } from '../components/ui/status';
 import { toneFor } from '../components/ui/tones';
 import SectionRenderer from '../components/case/SectionRenderer';
@@ -58,7 +59,7 @@ function CaseIntro({ promise }) {
             {content.meta.map((m) => (
               <div key={m.label} className="min-w-0">
                 <dt className="text-sm text-muted">{m.label}</dt>
-                <dd className={`mt-1 ${m.measured ? 'measured text-ink' : 'text-ink'}`}>{m.value}</dd>
+                <dd className={`mt-1 ${m.measured ? 'measured text-ink-2' : 'text-ink'}`}>{m.value}</dd>
               </div>
             ))}
           </dl>
@@ -127,12 +128,12 @@ export default function ProjectCaseStudy() {
           <ArrowLeft size={16} aria-hidden="true" />
           All projects
         </Link>
-        <span aria-hidden="true" className={`mt-10 block h-1 w-12 rounded-[2px] ${toneFor(project.category).bar}`} />
-        <p className={`mt-6 flex flex-wrap items-center gap-3 text-sm ${toneFor(project.category).text}`}>
+        <Asterisk className={`mt-10 h-5 w-5 ${toneFor(project.category).text}`} />
+        <h1 className="mt-6 max-w-[22ch]">{project.title}</h1>
+        <p className={`mt-4 flex flex-wrap items-center gap-3 text-sm ${toneFor(project.category).text}`}>
           {project.area}
           <Chip tone={statusTone(project.status)}>{project.status}</Chip>
         </p>
-        <h1 className="mt-4 max-w-[22ch]">{project.title}</h1>
         <Suspense key={slug} fallback={<p className="lead mt-6 max-w-[46ch] text-ink-2">{project.summary}</p>}>
           <CaseIntro promise={loadCase(slug)} />
         </Suspense>

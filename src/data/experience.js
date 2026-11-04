@@ -2,7 +2,7 @@
 export const experience = [
   {
     id: 'kean-secops',
-    tone: 'blue',
+    tone: 'lime',
     role: 'Junior Security Operations Analyst',
     shortRole: 'Junior SecOps Analyst',
     org: 'Kean University',
@@ -27,7 +27,7 @@ export const experience = [
   },
   {
     id: 'house-of-hearts',
-    tone: 'green',
+    tone: 'sage',
     role: 'Strategic Operations and IT Manager',
     shortRole: 'Strategic Operations and IT Manager',
     org: 'House of Hearts Network',
@@ -49,7 +49,7 @@ export const experience = [
   },
   {
     id: 'kean-threat-intel',
-    tone: 'violet',
+    tone: 'dusk',
     role: 'Threat Intelligence Analyst Intern',
     shortRole: 'Threat Intelligence Analyst Intern',
     org: 'Kean University',

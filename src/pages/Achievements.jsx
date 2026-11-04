@@ -3,25 +3,24 @@ import SectionHead from '../components/ui/SectionHead';
 import Reading from '../components/ui/Reading';
 import Chip from '../components/ui/Chip';
 import { statusTone } from '../components/ui/status';
-import SignalBar from '../components/ui/SignalBar';
+import PageHeader from '../components/ui/PageHeader';
 import { tones } from '../components/ui/tones';
 
-const issuerTone = { CompTIA: 'blue', Fortinet: 'green', Zscaler: 'violet', Cisco: 'sky' };
-const toneOf = (source = '') => tones[issuerTone[source.split(' ')[0]] ?? 'violet'];
+const issuerTone = { CompTIA: 'lime', Fortinet: 'sage', Zscaler: 'dusk', Cisco: 'stone' };
+const toneOf = (source = '') => tones[issuerTone[source.split(' ')[0]] ?? 'dusk'];
 import { earned, inProgress, academic } from '../data/certifications';
 
 const honorSocieties = academic.filter((a) => a.type === 'Honor society').length;
 
 const readings = [
-  { value: earned.length, label: 'Industry certifications earned', tone: 'blue' },
-  { value: inProgress.length, label: 'Certification in progress', tone: 'sky' },
-  { value: honorSocieties, label: 'Honor society memberships', tone: 'violet' },
+  { value: earned.length, label: 'Industry certifications earned' },
+  { value: inProgress.length, label: 'Certification in progress' },
+  { value: honorSocieties, label: 'Honor society memberships' },
 ];
 
 function Row({ source, title, description, chip, tone, date }) {
   return (
-    <li className="relative grid gap-3 p-6 sm:grid-cols-[minmax(0,1fr)_auto] sm:gap-8 sm:p-8">
-      <span aria-hidden="true" className={`absolute inset-y-0 left-0 w-1 ${toneOf(source).bar}`} />
+    <li className="grid gap-3 p-6 sm:grid-cols-[minmax(0,1fr)_auto] sm:gap-8 sm:p-8">
       <div className="min-w-0">
         <p className={`text-sm ${toneOf(source).text}`}>{source}</p>
         <h3 className="mt-1 text-lg">{title}</h3>
@@ -29,7 +28,7 @@ function Row({ source, title, description, chip, tone, date }) {
       </div>
       <div className="flex flex-wrap items-start gap-3 sm:flex-col sm:items-end">
         <Chip tone={tone}>{chip}</Chip>
-        {date ? <p className={/\d/.test(date) ? 'measured text-cool' : 'text-sm text-muted'}>{date}</p> : null}
+        {date ? <p className={/\d/.test(date) ? 'measured text-ink-2' : 'text-sm text-muted'}>{date}</p> : null}
       </div>
     </li>
   );
@@ -56,13 +55,10 @@ export default function Achievements() {
         description="CompTIA Security+, Fortinet and Zscaler certifications, CCNA in progress, and academic honors at Kean University."
       />
 
-      <section className="container pt-16 pb-[var(--section-gap-s)] sm:pt-24 lg:pt-[var(--section-gap-s)]">
-        <SignalBar className="mb-8" />
-        <h1>Certifications</h1>
-        <p className="lead mt-6 max-w-[56ch] text-ink-2">
-          Industry certifications, current study, and academic honors.
-        </p>
-      </section>
+      <PageHeader
+        title="Certifications"
+        lead="Industry certifications, current study, and academic honors."
+      />
 
       <section aria-label="Credential counts" className="container">
         <div className="panels sm:grid-cols-3">

@@ -1,41 +1,80 @@
-# Build brief for page agents (read fully before editing)
+# Build brief for page agents: Acid Split (read fully before editing)
 
-Repo: React 19 + Vite 8 + Tailwind 3.4.19 + react-router-dom 7 (data router). Design doc: `docs/designs/portfolio-refactor.md`.
-Visual system: Hallmark **Console** theme. The Home page (`src/pages/Home.jsx`) is the reference implementation: read it first and match its patterns.
+Repo: React 19 + Vite 8 + Tailwind 3.4.19 + react-router-dom 7 (data router).
+Design doc (binding spec): `docs/designs/acid-split-redesign.md`. Approved hero (visual source of truth for Home values): `docs/designs/reference/hero-4b-split.html`.
+Visual system: **Acid Split**. A near-black ground and off-white ink, with acid lime as the only saturated colour. Type is Anton (display, uppercase), Instrument Serif italic (secondary heads) and Archivo (body).
 
-## Files you must NOT edit (shared foundation; report needed changes instead)
-`src/styles/*`, `src/index.css`, `tailwind.config.js`, `vite.config.js`, `eslint.config.js`, `package.json`, `package-lock.json`, `index.html`, `src/main.jsx`, `src/App.jsx`, `src/hooks/*`, `src/components/ui/*`, `src/components/{Nav,Footer,Layout,Seo,CopyEmail,ProjectRow,icons}.jsx`, `src/data/{site,profile,nav,experience}.js`, `src/data/projects/index.js`, `src/pages/Home.jsx`, `src/pages/NotFound.jsx`. Do not run `npm install`. Do not commit. Do not stop or start the dev server (it runs at http://127.0.0.1:5173).
+Do not run `npm install`. Do not commit, push or switch branches. Do not start or stop servers unless your task says so.
 
-## Available building blocks
-- Tailwind colours (only these exist): `paper`, `paper-2`, `paper-3`, `ink`, `ink-2`, `muted`, `rule`, `rule-2`, `accent`, `accent-ink`, `accent-soft`, `cool`, `cool-soft`, `ok`, `ok-soft`, `bad`, `bad-soft`. Fonts: `font-sans` (Host Grotesk), `font-mono` (Atkinson Hyperlegible Mono). Sizes: `text-lead`, `text-title`, `text-section`, `text-display`, `text-display-s`, plus Tailwind's `text-sm/lg/xl`. Radius: `rounded-card` (10px), `rounded-pill` (6px). Durations `duration-short`, easing `ease-out`.
-- CSS classes in `src/index.css`: `.container` (capped, centred, gutters), `.panel` (hairline surface), `.panels` (grid of panels joined by 1px seams; children get paper-2), `.measured` (mono, for measured values only), `.reading` (large mono value), `.btn`, `.btn--primary`, `.chip`, `.chip--person|instrument|ok`, `.filter` (toggle button; use `aria-pressed`), `.link`, `.row-link`, `.field` (inputs; supports `aria-invalid`), `.trail`/`.trail-mark`/`.trail-mark--current` (audit-trail spine), `.enter` (fade/translate-in for items entering), `.proportion` (bar), `.lead`, `.visually-hidden`.
-- Base CSS already styles `h1` (display size), `h2` (section size), `h3` (title size), all weight 500, sentence case. Don't restyle headings except size when you must.
-- Components: `ui/Button` (`to` | `href` + `external` | button; `variant="primary"` at most once per screen), `ui/Chip` + `ui/status.js` `statusTone()`, `ui/SectionHead` ({id,title,lead,link}), `ui/Reading` (count-up value), `Seo` ({title, description, noindex}) – every page renders one `<Seo>`, `CopyEmail`, `ProjectRow`, `icons.jsx` (LinkedinIcon, GithubIcon). Hooks: `useInView`, `useCountUp`, `useCopyToClipboard`, `usePrefersReducedMotion`. Icons: `lucide-react` (always `aria-hidden="true"`).
-- Data: `profile`, `experience` + `formatMonth`, `projects` + `categories`, `normalizeCategory`, `getProject`, `getNeighbours`, `featuredProjects`.
-- Router: use `Link`/`NavLink` from `react-router-dom` with the `viewTransition` prop on internal links.
+## Locked files (Phase 1; do NOT edit, report a needed change instead)
 
-## Hard rules (Hallmark Floor; the linter fails the build on these)
-1. No colour literals (no hex, rgb, `slate-*`, `cyan-*`, arbitrary `[#...]`). Only the token classes above or `var(--color-*)`.
-2. Never `transition-all`; only `transition-colors`, `transition-opacity`, `transition-transform`. Never animate width/height/top/left.
-3. No eyebrows: no small uppercase/tracked label above a heading. No `uppercase`, no `tracking-*` classes anywhere. Labels are sentence case, body face, a step smaller, `text-muted`.
-4. Mono (`font-mono`/`.measured`/`.reading`) ONLY for measured values: dates, counts, ports, IPs, versions, command lines, file paths, subnet. Never on labels, headings, buttons, chips or tags.
-5. No middle-dot (`•`, `·`) joined meta strings; no decorative status dots; no arrows glued into link text (`View &gt;`). No emoji.
-6. No card inside a card (no `.panel` inside `.panel`; a `.panels` group is one surface). No glows, shadows, gradients, backdrop blur.
-7. Every interactive element keyboard-reachable with visible focus (the provided classes already have `:focus-visible`). Every animation has a reduced-motion fallback (`motion-reduce:` or the CSS class's media query).
-8. Grids holding images: `grid-cols-[minmax(0,1fr)]`-style tracks / `minmax(0,1fr)`; add `min-w-0` on grid children with long text.
-9. Never invent a metric, quote, logo or fact. Every fact comes from the old page files (read them from `git show HEAD:<path>` if already deleted).
-10. Copy: tighten wordy/buzzword lines using only facts already on the old page; no em dashes (—) in copy, use commas/colons/periods; typographic apostrophes (’). Keep proper nouns, figures, dates, links exactly.
-11. ~80 words per visible screen in intros; page h1 ≤ 7 words where possible, with one lead sentence under it.
-12. Images: `loading="lazy"` + `decoding="async"` + explicit `width`/`height` (or an aspect-ratio box) below the fold. Project photos sit in a `data-slot` box (duotone treatment comes from base.css) with a caption.
+`index.html`, `tailwind.config.js`, `src/styles/tokens.css`, `src/styles/base.css`, `src/index.css`, `src/hooks/useMotionPause.js`, `src/components/MotionToggle.jsx`, `src/components/ProfileLinks.jsx`, `src/components/Rail.jsx`, `src/components/Layout.jsx`, `src/components/Nav.jsx`, `src/components/Footer.jsx`, `src/components/ProjectRow.jsx`, `src/components/ui/*` (Asterisk, PageHeader, Button, Chip, Reading, SectionHead, tones.js, status.js), `src/components/case/ReadingsSection.jsx`, `src/components/case/PipelineSection.jsx`, `src/data/profile.js`, `src/data/experience.js`, `public/favicon.svg`, `src/test/setup.js`.
+Also untouched by everyone: `vite.config.js`, `eslint.config.js`, `package*.json`, `src/main.jsx`, `src/App.jsx`, `src/components/{Seo,CopyEmail,icons}.jsx`, `src/data/**` other than the files above, and the untracked legacy files (`src/App.css`, `src/assets/`, `src/components/{BackToProjects,Navbar,ScrollToTop,SocialIcons}.jsx`, `src/pages/{CyberRadio,DFIRTriage,HomeLab,NCyTEChallenge,NGOThreatIntel,PhysicalServer,PiHole,WazuhLab}.jsx`). Never import, edit or delete a legacy file.
 
-## Page header pattern (non-home pages: "Banner" posture)
-```jsx
-<section className="container pt-16 pb-12 sm:pt-24">
-  <h1>Short head</h1>
-  <p className="lead mt-6 max-w-[56ch] text-ink-2">One sentence.</p>
-</section>
-```
-Sections below use `className="container mt-[var(--section-gap)]"` and `SectionHead`.
+## Phase 2 groups (each group edits ONLY its own files)
 
-## Done means
-`npx eslint <your files>` clean; `npx vite build` passes; your route renders with no console errors. Report: files created/modified/deleted, every copy line you reworded (before → after), anything you needed in a shared file.
+| Group | Files |
+| --- | --- |
+| A | `src/pages/Home.jsx`, `src/test/app.test.jsx` |
+| B | `src/pages/Projects.jsx`, `src/pages/ProjectCaseStudy.jsx`, `src/components/case/{CaseSection,GallerySection,ItemList,LessonsSection,LinksSection,ListSection,NoteSection,PairSection,ProseSection,ReposSection,RichText,SectionRenderer}.jsx` |
+| C | `src/pages/Experience.jsx`, `src/pages/Achievements.jsx` |
+| D | `src/pages/About.jsx`, `src/pages/Contact.jsx`, `src/pages/Photography.jsx`, `src/pages/NotFound.jsx` |
+
+## Building blocks
+
+### Tailwind tokens (only these exist)
+- Colours: `paper`, `paper-2`, `paper-3`, `ink`, `ink-2`, `muted`, `rule`, `rule-2`, `accent`, `accent-ink`, `accent-soft`, `ok`, `ok-soft`, `bad`, `bad-soft`. The tints `sage`, `stone`, `dusk` (and `-soft`) exist but may be named ONLY in `src/components/ui/tones.js`. Pages get category colour from `tones`, `toneFor()`, `toneAt()`.
+- Fonts: `font-sans` (Archivo), `font-display` (Anton), `font-serif` (Instrument Serif), `font-mono` (Atkinson Hyperlegible Mono: measured values only).
+- Sizes: `text-lead`, `text-title`, `text-section`, `text-display`, `text-display-s`, plus Tailwind `text-sm/lg/xl`.
+- Radius: `rounded-card` (14px panels and tiles), `rounded-pill` (6px: thumbnails, alerts, skeletons, focus outlines), `rounded-round` (999px).
+- Screens: `sm` 640, `md` 768, `rail` 900, `lg` 1024, `nav` 1100, `xl` 1280, `2xl` 1536. Durations `duration-short`, easing `ease-out`.
+
+### CSS classes (`src/index.css`)
+- Surfaces: `.container` (1320px cap, clamp gutter), `.panel`, `.panels` (children get paper-2), `.tile`.
+- Type: `.lead`, `.measured` (mono, measured values only), `.reading` (Anton figure; a `<sup>` inside is lime), `.label` (small tracked uppercase), `.pill` (uppercase outlined pill), `.visually-hidden`.
+- Status: `.status-dot` (ONLY beside "Open to work" and the availability line).
+- Buttons: `.btn` (outlined pill; hover fills ink), `.btn--primary` (lime; one per screen), `.btn__ico` (dark disc inside a primary button), `.btn--icon` (44px icon circle), `.btn-round` + `.disc` (round play-disc link with a `<small>` second line).
+- Chips and filters: `.chip`, `.chip--person` (lime), `.chip--instrument` (neutral), `.chip--ok`, `.filter` (use `aria-pressed`; neutral pressed state, a tone `pressed` class wins).
+- Links: `.link`, `.row-link`.
+- Forms: `.field` (10px radius; supports `aria-invalid`).
+- Trail: `.trail`, `.trail-mark`, `.trail-mark--current`.
+- Motion: `.enter`, `.proportion`.
+- Home only: `.hero`, `.copy`, `.star-xl`, `.hello`, `.h1__a`, `.h1__b`, `.amp`, `.lede`, `.actions`, `.status-row`, `.plate`, `.photo`, `.place`, `.badge`, `.badge__ring`, `.badge__core`, `.bento`, `.about`, `.about__head`, `.skills`, `.avail`, `.stat`, `.stat__num`, `.stat__label`, `.stat__source`.
+- Shell (already used by locked components): `.page`, `.brand`, `.nav__link`, `.nav__cta`, `.rail`, `.rail__mark`, `.rail__status`, `.social`.
+- Portrait: put `data-slot="portrait"` on the wrapper of the owner's portrait (Home plate, About bio) to get the black-and-white filter. Every other image stays in full colour, with no filter.
+
+### Components and hooks
+- `ui/Asterisk` `{ variant: 'solid' | 'outline', className }`: the 12-point star, always `aria-hidden`.
+- `ui/PageHeader` `{ title, lead }`: the Banner header (asterisk, `h1`, lead) for About, Achievements, Contact, Experience, Photography, Projects.
+- `ui/Button` `{ to | href, external, variant: 'primary' | 'secondary', icon, className }`. `icon` is a React element; on primary it renders after the label inside `.btn__ico`.
+- `ui/Reading` `{ value, suffix, label, source, to, tag }`: a stat tile (`stat tile`), with an Anton figure and a lime `sup` suffix. There is no `tone` prop.
+- `ui/Chip` + `ui/status.js` `statusTone()`; `ui/SectionHead` `{ id, title, lead, link }`; `Seo`; `CopyEmail`; `ProjectRow`; `icons.jsx` (`LinkedinIcon`, `GithubIcon`).
+- `ProfileLinks` `{ variant: 'icon' | 'text', omit: ['linkedin' | 'github' | 'resume'], className }`: LinkedIn, GitHub, Resume; new tab, `rel="noopener noreferrer"`, hidden "(opens in a new tab)".
+- `MotionToggle` `{ compact }`, `Rail`: shell only; pages do not render them.
+- Hooks: `useMotionPause`, `useInView`, `useCountUp`, `useCopyToClipboard`, `usePrefersReducedMotion`.
+- Tone keys: `lime`, `sage`, `dusk`, `stone`. `categoryTone = { secops: 'lime', infrastructure: 'sage', homelab: 'dusk', intel: 'stone' }`. Each tone has `text`, `soft`, `bar`, `border`, `hover` and `pressed` class strings.
+- Data (`src/data/profile.js`): `profile.hero.{display, serif, projectsNote, badge, monogram}`, `profile.heroLede` and `profile.aboutShort` (`{ before, strong, after }`), `profile.status`, `profile.focus[]`, `profile.education.short`, `profile.readings[]` (with `tag`). (`headline`, `heroSentence`, `whoami` and `record` were removed in Phase 3.)
+
+## Hard rules
+
+1. No colour literals (hex, `rgb()`, Tailwind palette names, arbitrary `[#...]`). Only token classes or `var(--color-*)`.
+2. Never `transition-all`. Transition colours, opacity and transform only. Never animate width, height, top or left.
+3. Uppercase appears ONLY in: `h1` (base CSS does it), `.label`, `.pill`, `.brand` and the badge ring text. No `uppercase` or `tracking-*` utilities elsewhere. Never put a `.label` directly above a heading as an eyebrow.
+4. `h1` is Anton uppercase and `h2` is Instrument Serif italic, both from base CSS. Add NO font classes to `h2`. `h3` is Archivo 600, sentence case.
+5. Mono (`font-mono`, `.measured`) ONLY for measured values: dates, counts, ports, IPs, versions, paths. Measured values use `text-ink-2`, never a tint.
+6. Middle dots only in the badge string and the degree pill. Status dots only as `.status-dot` beside "Open to work" or the availability line. No arrows glued into link text. No emoji.
+7. No card inside a card. No glows, gradients or blur. Shadows exist only on the Home portrait wrapper and `.badge` (tokens `--shadow-plate`, `--shadow-badge`).
+8. Every interactive element is keyboard-reachable with a visible lime focus ring (the classes provide it). Every animation has a reduced-motion fallback.
+9. Grid tracks use `minmax(0,1fr)`. Add `min-w-0` to grid children with long text.
+10. Never invent, drop or reword a fact, link, image, PDF, form field or behaviour. Content stays exactly as it is in the current files (`git show HEAD:<path>` shows the originals). The only data changes are those in the design doc's "Data model changes" table, and they are already in `profile.js`.
+11. Copy: no em dashes; typographic apostrophes (’). Keep proper nouns, figures, dates and links exactly.
+12. Images below the fold: `loading="lazy"`, `decoding="async"`, explicit `width` and `height` (or an aspect-ratio box). Photographs stay in colour; only `data-slot="portrait"` is black and white.
+13. G4: only `tones.js` names `sage`, `stone` or `dusk`.
+14. No horizontal scroll at 375px.
+
+## Definition of done
+
+- `npm run build`, `npm run lint` and `npm test` pass.
+- No new colour literals, and no tint class names outside `tones.js`.
+- If you need a class or token that does not exist, STOP and report it to the Elephant. Do not write local CSS, inline styles for visuals, or arbitrary values to work around it.
+- Report: the files you changed, every class you replaced (before and after), and anything unresolved.
